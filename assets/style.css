@@ -129,12 +129,12 @@ h2 {
         display: block; /* Stacks tiles vertically */
         width: auto;
         text-align: center;
-        margin: 0px 0;
+        margin: 20px 10px;
         padding: 30px;
     }
 
     .tile img {
-        max-width: 100%;
+        max-width: 70%;
         height: auto;
     }
 
@@ -144,11 +144,11 @@ h2 {
 
     h1 {
         font-size: 48px;
-        margin-bottom: 10px;
+        margin-bottom: 4px;
     }
 
     h2 {
         font-size: 32px;
-        margin-bottom: 10px; /* Reduce spacing */
+        margin-bottom: 4px; /* Reduce spacing */
     }
 }
