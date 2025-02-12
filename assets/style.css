@@ -97,6 +97,12 @@ h2 {
     h2 {
         font-size: 32px;
     }
+ 
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
     .tile {
         display: block;
