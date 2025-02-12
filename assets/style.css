@@ -6,7 +6,7 @@
 body {
     background-color: white;
     font-family: whyte-inktrap;
-    font-size: 2.4em;
+    font-size: 2.2em;
     line-height: 1.1;
     display: flex;
     justify-content: center;
@@ -63,6 +63,11 @@ h2 {
 .menu li {
     list-style-type: none;
     float: left;
+}
+
+.menu ul {
+    margin: 0;
+    padding: 0;
 }
 
 .header {
