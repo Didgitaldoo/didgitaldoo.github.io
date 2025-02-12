@@ -49,10 +49,12 @@ h2 {
 
 .menu {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center; /*flex-end;*/
     padding: 10px;
     margin-top: 4px;
     margin-bottom: 20px;
+    text-align: center;
+    align-items: center;
 }
 
 .menu li a {
@@ -69,6 +71,8 @@ h2 {
 .menu ul {
     margin: 0;
     padding: 0;
+    text-align: center;
+    align-items: center;
 }
 
 .header {
@@ -77,6 +81,7 @@ h2 {
 
 .content {
     margin-top: 12%;
+
 }
 
 .tile {
@@ -123,8 +128,8 @@ h2 {
     }
  
     .content {
-      display: flex;
-      flex-wrap: wrap;
+      display: block;
+      /* flex-wrap: wrap; */
       justify-content: center;
       margin-top: 10px;
     }
