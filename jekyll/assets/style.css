@@ -1,0 +1,73 @@
+@font-face {
+    font-family: whyte-inktrap;
+    src: url(whyteinktrap/WhyteInktrap-Light.woff);
+  }
+  
+body{
+    background-color: white;
+    font-family: whyte-inktrap;
+    line-height:140%;
+    display: flex;
+    justify-content: center;
+}
+
+.main{
+    width: 800px;
+}
+a:visited{
+    color: blue;
+}
+
+h1{
+    display: inline-block;
+    font-size:60px;
+    margin-bottom:10px;
+}
+
+h2{
+    font-size: 38px;
+    margin-bottom: 50px;
+}
+
+.menu{
+    float: right;
+}
+
+.menu li a{
+    text-decoration: none;
+    font-size:20px;
+    padding:16px;
+}
+
+.menu li{
+    list-style-type: none;
+    float: left;
+}
+
+.header{
+    height:120px;
+}
+
+.content{
+    margin-top:60px;
+}
+
+.tile{
+    background-color: #eeeeee;
+    padding: 20px;
+    display: inline-block;
+    text-align: center;
+    margin:12px;
+}
+
+.tile .name {
+    display: block;
+    margin-top:18px;
+    width: 150px;   
+}
+
+.tile img{
+    max-height: 200px;
+    max-width: 200px;
+    display: block;
+}
