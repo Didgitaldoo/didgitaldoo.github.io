@@ -127,9 +127,9 @@ h2 {
 
     .tile {
         display: block; /* Stacks tiles vertically */
-        width: 100%;
+        width: auto;
         text-align: center;
-        margin: 20px 0;
+        margin: 0px 0;
         padding: 30px;
     }
 
