@@ -41,9 +41,10 @@ h2 {
 }
 
 .main {
-    width: 100%;
-    max-width: 800px;
-    padding: 20px;
+    width: auto;
+    max-width: 100%;
+    padding: 2px;
+    margin: 0px;
     box-sizing: border-box;
 }
 
@@ -77,11 +78,11 @@ h2 {
 
 .header {
     height: 120px;
+    padding-right: 20px;
 }
 
 .content {
     margin-top: 12%;
-
 }
 
 .tile {
@@ -162,13 +163,16 @@ h2 {
     }
     
     code {
-        font-size: 14px;
-        margin: 12px;
-        padding: 12px;
+        font-size: 12px;
+        margin: 8px;
+        padding: 8px;
+        max-width: 90%;
+        width: auto;
+        height: auto;
     }
 
     img {
-        max-width: 85%;
+        max-width: 94%;
         height: auto;
     }
 }
