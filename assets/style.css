@@ -134,8 +134,8 @@ h2 {
     }
 
     .tile img {
-        max-width: 70%;
-        max-height: 70%;
+        max-width: 90%;
+        max-height: auto;
     }
 
     .tile .name {
