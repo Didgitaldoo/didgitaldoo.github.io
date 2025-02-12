@@ -83,6 +83,8 @@ h2 {
 @media (max-width: 800px) {
     .menu {
         float: none;
+        text-align: center;
+        padding: 10px 0;
     }
 
     .menu li {
@@ -90,12 +92,24 @@ h2 {
         display: inline-block;
     }
 
+    .menu li a {
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    .header {
+        height: auto; 
+        text-align: center;
+    }
+
     h1 {
         font-size: 48px;
+        margin-bottom: 10px;
     }
 
     h2 {
         font-size: 32px;
+        margin-bottom: 30px; /* Reduce spacing */
     }
  
     .content {
@@ -105,10 +119,10 @@ h2 {
     }
 
     .tile {
-        display: block;
+        display: block; /* Stacks tiles vertically */
         width: 100%;
         text-align: center;
-        margin: 20px 0; 
+        margin: 20px 0;
         padding: 30px;
     }
 
@@ -118,6 +132,6 @@ h2 {
     }
 
     .tile .name {
-        font-size: 4.5em;
+        font-size: 24px;
     }
 }
