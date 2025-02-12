@@ -6,6 +6,7 @@
 body {
     background-color: white;
     font-family: whyte-inktrap;
+    line-height: 140%;
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -26,13 +27,13 @@ a:visited {
 h1 {
     display: inline-block;
     font-size: 60px;
-    margin-bottom: 4%;
+    margin-bottom: 10px;
 }
 
 h2 {
     font-size: 38px;
-    margin-bottom: 14%;
-    line-height: 2em;
+    margin-bottom: 50px;
+    line-height: 1.3;
 }
 
 .menu {
