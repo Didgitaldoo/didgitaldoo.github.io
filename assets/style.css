@@ -116,6 +116,7 @@ h2 {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: 10px;
     }
 
     .tile {
