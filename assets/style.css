@@ -80,7 +80,7 @@ h2 {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .menu {
         float: none;
     }
@@ -118,6 +118,6 @@ h2 {
     }
 
     .tile .name {
-        font-size: 2.5em;
+        font-size: 4.5em;
     }
 }
