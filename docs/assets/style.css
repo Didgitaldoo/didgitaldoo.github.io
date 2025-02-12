@@ -33,6 +33,7 @@ h1 {
 h2 {
     font-size: 38px;
     margin-bottom: 50px;
+    line-height: normal;
 }
 
 .menu {
