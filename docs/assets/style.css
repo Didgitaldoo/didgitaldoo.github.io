@@ -6,7 +6,6 @@
 body {
     background-color: white;
     font-family: whyte-inktrap;
-    line-height: 140%;
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -33,7 +32,7 @@ h1 {
 h2 {
     font-size: 38px;
     margin-bottom: 14%;
-    line-height: normal;
+    line-height: 2em;
 }
 
 .menu {
