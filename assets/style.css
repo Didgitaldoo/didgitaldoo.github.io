@@ -20,9 +20,15 @@ body {
     box-sizing: border-box;
 }
 
-a:visited {
-    color: blue;
+a {
+    color: black;
+    text-decoration: none;
 }
+
+/* a:visited { */
+/*     color: blue; */
+/* } */
+/**/
 
 html {
     overflow-x: hidden;
@@ -66,7 +72,7 @@ h2 {
 }
 
 .content {
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 .tile {
@@ -133,7 +139,7 @@ h2 {
     }
 
     .tile .name {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     body {
@@ -148,6 +154,6 @@ h2 {
 
     h2 {
         font-size: 32px;
-        margin-bottom: 30px; /* Reduce spacing */
+        margin-bottom: 10px; /* Reduce spacing */
     }
 }
