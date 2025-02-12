@@ -99,7 +99,19 @@ h2 {
     }
 
     .tile {
+        display: block;
         width: 100%;
-        margin: 12px 0;
+        text-align: center;
+        margin: 20px 0; 
+        padding: 30px;
+    }
+
+    .tile img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .tile .name {
+        font-size: 24px;
     }
 }
