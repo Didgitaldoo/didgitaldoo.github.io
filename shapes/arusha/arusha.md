@@ -34,7 +34,6 @@ The Arusha shape has toots tuned in a minor scale.
 ```
 ![Impedance Spektrum](shape.png)
 
-
 ![Impedance Spektrum](impedance_spektrum.png)
 
 ### Ground Tone Spektrum
