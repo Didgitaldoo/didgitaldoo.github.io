@@ -47,7 +47,11 @@ h2 {
 }
 
 .menu {
-    float: right;
+    /* float: right; */
+    /* set menu on its own line */
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
 }
 
 .menu li a {
