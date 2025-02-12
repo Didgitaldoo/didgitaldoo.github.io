@@ -1,73 +1,104 @@
 @font-face {
     font-family: whyte-inktrap;
     src: url(whyteinktrap/WhyteInktrap-Light.woff);
-  }
-  
-body{
-    background-color: white;
-    font-family: whyte-inktrap;
-    line-height:140%;
-    display: flex;
-    justify-content: center;
 }
 
-.main{
-    width: 800px;
+body {
+    background-color: white;
+    font-family: whyte-inktrap;
+    line-height: 140%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 0;
 }
-a:visited{
+
+.main {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+a:visited {
     color: blue;
 }
 
-h1{
+h1 {
     display: inline-block;
-    font-size:60px;
-    margin-bottom:10px;
+    font-size: 60px;
+    margin-bottom: 10px;
 }
 
-h2{
+h2 {
     font-size: 38px;
     margin-bottom: 50px;
 }
 
-.menu{
+.menu {
     float: right;
 }
 
-.menu li a{
+.menu li a {
     text-decoration: none;
-    font-size:20px;
-    padding:16px;
+    font-size: 20px;
+    padding: 16px;
 }
 
-.menu li{
+.menu li {
     list-style-type: none;
     float: left;
 }
 
-.header{
-    height:120px;
+.header {
+    height: 120px;
 }
 
-.content{
-    margin-top:60px;
+.content {
+    margin-top: 60px;
 }
 
-.tile{
+.tile {
     background-color: #eeeeee;
     padding: 20px;
     display: inline-block;
     text-align: center;
-    margin:12px;
+    margin: 12px;
 }
 
 .tile .name {
     display: block;
-    margin-top:18px;
+    margin-top: 18px;
     width: 150px;   
 }
 
-.tile img{
+.tile img {
     max-height: 200px;
     max-width: 200px;
     display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu {
+        float: none;
+    }
+
+    .menu li {
+        float: none;
+        display: inline-block;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    .tile {
+        width: 100%;
+        margin: 12px 0;
+    }
 }
