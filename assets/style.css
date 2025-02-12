@@ -151,4 +151,15 @@ h2 {
         font-size: 32px;
         margin-bottom: 4px; /* Reduce spacing */
     }
+    
+    code {
+        font-size: 14px;
+        margin: 12px;
+        padding: 12px;
+    }
+
+    img {
+        max-width: 75%;
+        height: auto;
+    }
 }
