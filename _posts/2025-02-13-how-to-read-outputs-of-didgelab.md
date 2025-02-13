@@ -6,7 +6,7 @@ date: 2025-02-13
 
 ## How to read the outputs of Didgelab
 
-When reading the outputs of Didgelab, you will ask yourself many questions, such as "why would I care for the tuning of a didgeridoo?" or "what the heck is impedance?" This article wants to explain the most important concepts one by one. The article is not about Didgeridoo physics. If you want to learn about Didgeridoo physics, I advise to watch the videos of Andrea Ferroni (put links here). This article explains the following concepts:
+When reading the outputs of Didgelab, you will ask yourself many questions, such as "why would I care for the tuning of a didgeridoo?" or "what the heck is impedance?" This article wants to explain the most important concepts one by one. The article is not about Didgeridoo physics. If you want to learn about Didgeridoo physics, I advise to watch the videos of Andrea Ferroni (e.g., [this](https://www.youtube.com/watch?v=idcPw0RaUiE&t=8s) and [this](https://www.youtube.com/watch?v=u0AxhK328Z0])). This article explains the following concepts:
 
 * <a href="#toots">Toots</a>
 * <a href="#impedance">Impedance</a>
