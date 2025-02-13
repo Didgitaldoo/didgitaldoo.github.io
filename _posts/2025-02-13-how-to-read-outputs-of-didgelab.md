@@ -55,7 +55,7 @@ Lets interpret this resonant frequencies table: The ground note of that didge is
 
 ### Sound spektrum
 
-Impedance spektrum and resonant frequencies table show the toots of a didgeridoo. But they do not give a very good insight in how it sounds. Most people are mostly interested in the sound of the ground tone and maybe the first one or two toots. The sound spektrum is a visual representation of the sound. It is produced by an FFT analysis. Again, it is a spektrum over the frequency and shows how "loud" the sound is at each frequency. It is the same visualization that you see in an equalizer. I like to see it as the "tonal balance" of a sound. It shows if the sound is bright or bassy. Generally, you have a different sound spektrum for the ground tone and each toot. In Didgelab I usually print the sound spektrum of the ground tone, although it is possibel to do the same for the toots as well.
+Impedance spektrum and resonant frequencies table show the toots of a didgeridoo. But they do not give a very good insight in how it sounds. Most people are mostly interested in the sound of the ground tone and maybe the first one or two toots. The sound spektrum is a visual representation of the sound. It is produced by an FFT analysis. Again, it is a spektrum over the frequency and shows how "loud" the sound is at each frequency. It is the same visualization that you see in an equalizer. I like to see it as the "tonal balance" of a sound. It shows if the sound is bright or bassy. Generally, you have a different sound spektrum for the ground tone and each toot. In Didgelab I usually print the sound spektrum of the ground tone, although it is possible to do the same for the toots as well.
 
 <img src="../../../shapes/arusha/ground_spektrum.png" />
 
