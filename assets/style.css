@@ -20,9 +20,29 @@ h1, h2, h3, p, img, .name, .menu, .button, .no-select, .header {
     user-select: none; 
 }
 
+/* Default link style */
 a {
-    color: black;
+    color: rgb(12, 12, 12); /* Dark green */
     text-decoration: none;
+    position: relative;
+    font-weight: 800; /* Makes links stand out */
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover effect */
+a:hover {
+    color: #222; /* Darker than #333 for better contrast */
+}
+
+/* Visited link color */
+a:visited {
+    color: rgb(0, 23, 12);
+}
+
+/* Underline effect on hover */
+a::after {
+    transition: width 0.3s ease-out, left 0.3s ease-out;
+    opacity: 1; /* Slight transparency for a softer effect */
 }
 
 html {
