@@ -1,0 +1,86 @@
+---
+layout: default
+title: Sketch
+---
+<!-- want to use tailwind but it broke the layout elsewhere so I'm just using it here atm -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-lg">
+  <h1 class="text-2xl font-bold mb-4">Didgeridoo Shape Analyzer</h1>
+  <form id="didgeForm" class="mb-4">
+    <label for="geoInput" class="block font-semibold">
+      Enter Geometry:
+      position diameter (mm)</label>
+    <textarea id="geoInput" rows="5" class="w-full p-2 border rounded"
+      placeholder="0 22&#10;10 10&#10;30 20&#10;42 24"></textarea>
+    <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Analyze</button>
+  </form>
+
+  <div id="results" class="hidden">
+    <h2 class="text-xl font-bold">Results</h2>
+
+    <p><strong>Mouthpiece Diameter:</strong> <span id="mouthpiece"></span> mm</p>
+    <p><strong>Didgeridoo Length:</strong> <span id="length"></span> mm</p>
+    <p><strong>Notes:</strong> <span id="notes"></span></p>
+
+    <h3 class="font-semibold mt-4">Shape</h3>
+    <img id="shapeImg" class="mt-2 border rounded" alt="Shape" />
+
+    <h3 class="font-semibold mt-4">Impedance Spectrum</h3>
+    <img id="impedanceImg" class="mt-2 border rounded" alt="Impedance Spectrum" />
+
+    <h3 class="font-semibold mt-4">Sound Spectrum</h3>
+    <img id="soundImg" class="mt-2 border rounded" alt="Sound Spectrum" />
+  </div>
+</div>
+
+<script>
+
+  let apiUrl = "https://didge-calc.ktano-studio.com/analyze_didge/";
+
+  document.getElementById("didgeForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    let geoInput = document.getElementById("geoInput").value.trim();
+
+    let geoData = geoInput.split("\n").map(line => {
+      let parts = line.trim().split(/\s+/);
+      if (parts.length !== 2) {
+        alert("Invalid format! Each line must have exactly two numbers.");
+        throw new Error("Invalid format");
+      }
+
+      if (parts[0].includes(".") || parts[1].includes(".")) {
+        alert("Sorry no decimals allowed for now.");
+        throw new Error("Invalid format");
+      }
+
+      return [parseFloat(parts[0]), parseFloat(parts[1])];
+    });
+
+
+    let response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({geo: geoData})
+    });
+
+    if (!response.ok) {
+      alert("Error connecting to the API.");
+      return;
+    }
+
+    let result = await response.json();
+
+    document.getElementById("mouthpiece").textContent = result.mouthpiece_diameter_mm;
+    document.getElementById("length").textContent = result.didgeridoo_length_mm;
+    document.getElementById("notes").textContent = result.notes;
+
+    document.getElementById("impedanceImg").src = "data:image/png;base64," + result.impedance_plot;
+    document.getElementById("soundImg").src = "data:image/png;base64," + result.sound_spectrum_plot;
+    document.getElementById("shapeImg").src = "data:image/png;base64," + result.shape_plot;
+
+    document.getElementById("results").classList.remove("hidden");
+  });
+
+</script>
