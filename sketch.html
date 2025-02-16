@@ -2,41 +2,66 @@
 layout: default
 title: Sketch
 ---
-<!-- want to use tailwind but it broke the layout elsewhere so I'm just using it here atm -->
-<script src="https://cdn.tailwindcss.com"></script>
+<div class="container mt-4">
 
-<div class="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-lg">
-  <h1 class="text-2xl font-bold mb-4">Didgeridoo Shape Analyzer</h1>
-  <form id="didgeForm" class="mb-4">
-    <label for="geoInput" class="block font-semibold">
-      Enter Geometry:
-      position diameter (mm)</label>
-    <textarea id="geoInput" rows="5" class="w-full p-2 border rounded"
-      placeholder="0 22&#10;10 10&#10;30 20&#10;42 24"></textarea>
-    <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Analyze</button>
-  </form>
+  <h1 class="text-center mb-4">Didgeridoo Shape Analyzer</h1>
 
-  <div id="results" class="hidden">
-    <h2 class="text-xl font-bold">Results</h2>
+  <!-- just enough to get the text area and the buttons to be in the same row -->
+  <div class="d-flex gap-5">
+    <select id="shapeSelect" class="form-select">
+      <option value="arusha_1">Arusha 1</option>
+      <option value="arusha_2">Arusha 2</option>
+      <option value="kizimazi">Kizimazi</option>
+      <option value="matema">Matema</option>
+    </select>
+    <button onclick="fetchShape()" class="btn btn-primary mt-1">Load Shape</button>
+  </div>
+
+  <div class="mb-3">
+    <form id="didgeForm" class="mt-4">
+      <label for="geoInput" class="form-label">
+        Enter Geometry: position diameter ( in mm)
+      </label>
+
+      <textarea id="geoInput" class="form-control" rows="6">0 28 &#10;100 26 &#10;1400 38 &#10;
+      </textarea>
+      <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-success mt-3">Analyze</button>
+    </form>
+    <div class="savebtn mt-3">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+    <div class="loadbtn mt-3">
+      <button type="submit" class="btn btn-primary">Load</button>
+    </div>
+
+  </div>
+
+  <hr>
+  <div id="results" class="hidden mt-5">
+    <h2>Results</h2>
 
     <p><strong>Mouthpiece Diameter:</strong> <span id="mouthpiece"></span> mm</p>
     <p><strong>Didgeridoo Length:</strong> <span id="length"></span> mm</p>
-    <p><strong>Notes:</strong> <span id="notes"></span></p>
 
-    <h3 class="font-semibold mt-4">Shape</h3>
-    <img id="shapeImg" class="mt-2 border rounded" alt="Shape" />
+    <strong>Tuning</strong> <span id="notes"></span>
 
-    <h3 class="font-semibold mt-4">Impedance Spectrum</h3>
-    <img id="impedanceImg" class="mt-2 border rounded" alt="Impedance Spectrum" />
+    <h3 class="mt-4">Shape</h3>
+    <img id="shapeImg" class="img-fluid" alt="Shape" />
 
-    <h3 class="font-semibold mt-4">Sound Spectrum</h3>
-    <img id="soundImg" class="mt-2 border rounded" alt="Sound Spectrum" />
+    <h3 class="mt-4">Impedance Spectrum</h3>
+    <img id="impedanceImg" class="img-fluid" alt="Impedance Spectrum" />
+
+    <h3 class="mt-4">Sound Spectrum</h3>
+    <img id="soundImg" class="img-fluid" alt="Sound Spectrum" />
   </div>
 </div>
 
 <script>
 
-  let apiUrl = "https://didge-calc.ktano-studio.com/analyze_didge/";
+  // let apiUrl = "https://didge-calc.ktano-studio.com";
+  let apiUrl = "http://localhost:8000";
 
   document.getElementById("didgeForm").addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -54,12 +79,11 @@ title: Sketch
         alert("Sorry no decimals allowed for now.");
         throw new Error("Invalid format");
       }
-
       return [parseFloat(parts[0]), parseFloat(parts[1])];
     });
 
 
-    let response = await fetch(apiUrl, {
+    let response = await fetch(apiUrl + "/analyze_didge", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({geo: geoData})
@@ -67,7 +91,7 @@ title: Sketch
 
     if (!response.ok) {
       alert("Error connecting to the API.");
-      return;
+      return; h
     }
 
     let result = await response.json();
@@ -80,7 +104,88 @@ title: Sketch
     document.getElementById("soundImg").src = "data:image/png;base64," + result.sound_spectrum_plot;
     document.getElementById("shapeImg").src = "data:image/png;base64," + result.shape_plot;
 
+    document.querySelector(".savebtn").addEventListener("click", function () {
+      var textToSave = geoInput;
+      var hiddenElement = document.createElement('a');
+
+      hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'didgeridoo.txt';
+      hiddenElement.click();
+    });
+
+    document.querySelector(".loadbtn").addEventListener("click", function () {
+      var fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.txt';
+      fileInput.click();
+
+      fileInput.addEventListener('change', function () {
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          var text = reader.result;
+          document.getElementById("geoInput").value = text;
+        };
+        reader.readAsText(file);
+      });
+    });
+
     document.getElementById("results").classList.remove("hidden");
+    displayNotesTable(result.notes);
   });
+
+  function displayNotesTable(notes) {
+    let notesContainer = document.getElementById("notes");
+    notesContainer.innerHTML = "";
+
+    let table = document.createElement("table");
+
+    let tbody = document.createElement("tbody");
+    let keysToDisplay = ["freq", "note-name", "cent-diff"];
+
+    let freqKeys = Object.keys(notes["freq"]);
+
+    keysToDisplay.forEach(category => {
+
+      let row = document.createElement("tr");
+
+      let tdCategory = document.createElement("td");
+      tdCategory.textContent = category;
+      row.appendChild(tdCategory);
+
+      let values = freqKeys.map(key => notes[category][key]);
+      values.unshift(values.pop());
+
+      values.forEach(value => {
+        let tdValue = document.createElement("td");
+
+        if (category === "cent-diff" || category === "freq") {
+          value = parseFloat(value).toFixed(2);
+        }
+
+        tdValue.textContent = value;
+        row.appendChild(tdValue);
+      });
+
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    notesContainer.appendChild(table);
+  }
+
+  function fetchShape() {
+
+    let shape_name = document.getElementById("shapeSelect").value;
+
+    fetch(apiUrl + "/fetch_shape/" + shape_name)
+      .then(response => response.json())
+      .then(data => {
+        let geo = data.geo.map(point => point.join(" ")).join("\n");
+        document.getElementById("geoInput").value = geo;
+      });
+  }
 
 </script>
