@@ -14,12 +14,6 @@ body {
     width: 100%
 }
 
-h1, h2, h3, p, img, .name, .menu, .button, .no-select, .header {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none; 
-}
-
 /* Default link style */
 a {
     color: blue;
