@@ -71,3 +71,86 @@ tr {
     max-width: 200px;
     display: block;
 }
+
+
+/** MOBILE CSS **/
+@media (max-width: 800px) {
+    .menu {
+        float: none;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .menu li {
+        float: none;
+        display: inline-block;
+    }
+
+    .menu li a {
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    .header {
+        height: auto; 
+        text-align: center;
+    }
+ 
+    .content {
+      display: block;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .tile {
+        display: block; /* Stacks tiles vertically */
+        width: auto;
+        text-align: center;
+        margin: 20px 10px;
+        padding: 30px;
+    }
+
+    .tile img {
+        max-width: 90%;
+        max-height: auto;
+    }
+
+    html, body {
+        font-size: 3.8vw;
+    }
+
+    h1 {
+        margin-bottom: 4px;
+    }
+
+    h2 {
+        margin-bottom: 4px; /* Reduce spacing */
+    }
+    
+    code {
+        font-size: 12px;
+        margin: 8px;
+        padding: 8px;
+        width: 80%;
+        height: auto;
+        text-align: center;
+        justify-content: center;
+    }
+
+    td {
+        padding: 0.2em 0.5em;
+        font-size: 10px;
+        text-wrap: wrap;
+    }
+
+    tr {
+        padding: 0.2em 0.5em;
+        font-size: 10px;
+        text-wrap: wrap;
+    }
+  
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
