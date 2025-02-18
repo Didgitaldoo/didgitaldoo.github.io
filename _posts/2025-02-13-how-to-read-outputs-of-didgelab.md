@@ -1,10 +1,10 @@
 ---
 layout: default
-title: How to read the outputs of Didgelab
+title: How to read a didge sheet
 date: 2025-02-13
 ---
 
-## How to read the outputs of Didgelab
+# How to read the outputs of Didgelab
 
 When reading the outputs of Didgelab, you will ask yourself many questions, such as "why would I care for the tuning of a didgeridoo?" or "what the heck is impedance?" This article wants to explain the most important concepts one by one. The article is not about Didgeridoo physics. If you want to learn about Didgeridoo physics, I advise to watch the videos of Andrea Ferroni (e.g., [this](https://www.youtube.com/watch?v=idcPw0RaUiE&t=8s) and [this](https://www.youtube.com/watch?v=u0AxhK328Z0])). This article explains the following concepts:
 
@@ -13,11 +13,11 @@ When reading the outputs of Didgelab, you will ask yourself many questions, such
 * <a href="#resonant-frequencies-table">Resonant Frequencies Table</a>
 * <a href="#sound-spektrum">Sound Spektrum</a>
 
-### Toots
+## Toots
 
 Each didgeridoo has a series of toots. When we talk about the tuning of the didgeridoo, we mean the toots. Each toot has a frequency, e.g., 146 Hz, which is also a note (146 Hz is D2). From the physics point of view, there is no difference between the ground tone and a toot. Generally, the ground tone or base frequency is the lowest toot.
 
-### Impedance
+## Impedance
 
 Impedance denotes how strong the didgeridoo reacts if you play it in a certain frequency. The impedance is different for each frequency. The impedance spectrum is a chart with frequency on the horizontal and impedance on the vertical axis. Here is an example of the impedance spectrum of the Arusha didgeridoo.
 
@@ -27,7 +27,7 @@ When you play the didgeridoo, your lips produce a soundwave at a certain frequen
 
 The impedance spektrum (and, similarly, the sound spektrum) reach only from 1-1000 Hz only. The human ear can perceive sounds from 1-20.000 Hz. The interesting frequencies in the didgeridoo are generally below 1000 Hz and, therefore, we show only these freuqencies.
 
-### Resonant frequencies table
+## Resonant frequencies table
 
 Another way to read the impedance chart is the "resonant frequencies table". It shows all peaks (or maxima) from the impedance spektrum of a didgeridoo. Here is the resonant frequencies table to above impedance spektrum.
 
@@ -53,7 +53,7 @@ Here is an explanation of the columns of the table
 
 Lets interpret this resonant frequencies table: The ground note of that didge is D1 because it is the first peak. Sometimes you got another peak below the ground note, that is unplayable. In these cases, the ground note is the smallest peak that is larger than roughly 60Hz. Further, we can say that the Didgeridoo has toots D2, A3 and A4. The toot at F3 has a very low impedance (look at rel_imp here) and, therefore, is unplayable. Very experienced plays can maybe also play the toot at F4.
 
-### Sound spektrum
+## Sound spektrum
 
 Impedance spektrum and resonant frequencies table show the toots of a didgeridoo. But they do not give a very good insight in how it sounds. Most people are mostly interested in the sound of the ground tone and maybe the first one or two toots. The sound spektrum is a visual representation of the sound. It is produced by an FFT analysis. Again, it is a spektrum over the frequency and shows how "loud" the sound is at each frequency. It is the same visualization that you see in an equalizer. I like to see it as the "tonal balance" of a sound. It shows if the sound is bright or bassy. Generally, you have a different sound spektrum for the ground tone and each toot. In Didgelab I usually print the sound spektrum of the ground tone, although it is possible to do the same for the toots as well.
 

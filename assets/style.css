@@ -3,51 +3,27 @@
     src: url(whyteinktrap/WhyteInktrap-Light.woff);
 }
 
-html {
-    font-size: 22px;
-    overflow-x: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    margin: 0;
-    padding: 0;
     background-color: white;
     font-family: whyte-inktrap;
-    font-size: 1.4em;
-    line-height: 1.2;
-    justify-content: center;
-    overflow-x: hidden;
-    width: 100%
 }
 
-.strike { 
-  text-decoration: line-through;
-  
+a.navbar-brand{
+    font-size: xx-large;
 }
 
 /* Default link style */
 a {
     color: blue;
     text-decoration: none;
-    position: relative;
-    font-weight: 800; /* Makes links stand out */
-    transition: color 0.3s ease-in-out;
-}
-
-/* Underline effect on hover */
-a::after {
-    transition: width 0.3s ease-out, left 0.3s ease-out;
-    opacity: 1; /* Slight transparency for a softer effect */
 }
 
 h1 {
     display: inline-block;
-    font-size: 60px;
+    font-size: xxx-large;
     margin-bottom: 10px;
     font-weight: 500;
+    margin-top:20px;
 }
 
 a.black{
@@ -76,48 +52,6 @@ tr {
     box-sizing: border-box;
 }
 
-.menu {
-    justify-content: center;
-    padding: 10px;
-    margin-top: 4px;
-    margin-bottom: 20px;
-    text-align: center;
-    align-items: center;
-}
-
-.menu li a {
-    text-decoration: none;
-    font-size: 20px;
-    padding: 16px;
-}
-
-.menu li {
-    list-style-type: none;
-    float: left;
-}
-
-.menu ul {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    align-items: center;
-}
-
-.header {
-    height: 120px;
-    padding-right: 20px;
-}
-
-.content {
-    margin-top: 6%;
-    animation: fadeIn 0.23s ease-in forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0.4; }
-    to { opacity: 1; }
-}
-
 .tile {
     background-color: #eeeeee;
     padding: 20px;
@@ -136,88 +70,4 @@ tr {
     max-height: 200px;
     max-width: 200px;
     display: block;
-}
-
-/* Responsive Design */
-@media (max-width: 800px) {
-    .menu {
-        float: none;
-        text-align: center;
-        padding: 10px 0;
-    }
-
-    .menu li {
-        float: none;
-        display: inline-block;
-    }
-
-    .menu li a {
-        font-size: 18px;
-        padding: 12px;
-    }
-
-    .header {
-        height: auto; 
-        text-align: center;
-    }
- 
-    .content {
-      display: block;
-      /* flex-wrap: wrap; */
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .tile {
-        display: block; /* Stacks tiles vertically */
-        width: auto;
-        text-align: center;
-        margin: 20px 10px;
-        padding: 30px;
-    }
-
-    .tile img {
-        max-width: 90%;
-        max-height: auto;
-    }
-
-    html, body {
-        /* font-size: // view width related */
-        font-size: 3.8vw;
-    }
-
-    h1 {
-        margin-bottom: 4px;
-    }
-
-    h2 {
-        margin-bottom: 4px; /* Reduce spacing */
-    }
-    
-    code {
-        font-size: 12px;
-        margin: 8px;
-        padding: 8px;
-        width: 80%;
-        height: auto;
-        text-align: center;
-        justify-content: center;
-    }
-
-    td {
-        padding: 0.2em 0.5em;
-        font-size: 10px;
-        text-wrap: wrap;
-    }
-
-    tr {
-        padding: 0.2em 0.5em;
-        font-size: 10px;
-        text-wrap: wrap;
-    }
-  
-    img {
-        width: 100%;
-        height: auto;
-    }
 }
