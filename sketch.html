@@ -40,7 +40,8 @@ title: Sketch
   </div>
 
   <hr>
-  <div id="results" class="hidden mt-5">
+  <div id="hint"></div>
+  <div id="results" class="d-none mt-3">
     <h2>Results</h2>
 
     <p><strong>Mouthpiece Diameter:</strong> <span id="mouthpiece"></span> mm</p>
@@ -68,23 +69,34 @@ title: Sketch
     var modal = document.createElement("div");
     modal.classList.add("modal");
     modal.innerHTML = `
-<div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Help</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-      <p>Enter the geometry of the didgeridoo in the text area. Each line should contain two numbers separated by a space. The first number is the position along the didgeridoo, and the second number is the diameter at that position. In millimeters</p>
-      <p>For example:</p>
-            <pre>0 32 [ Mouthpiece is position 0, 32 mm diameter]&#10;100 34 [ at a 100mm mark 34mm wide]&#10;200 38 &#10;1400 38 &#10;</pre>
-            <p>Hit the "Analyze" button to calculate the mouthpiece diameter, didgeridoo length, and tuning information. The results will be displayed below.</p>
-            <p>Hit the "Save" button to save the geometry to a txt file.</p>
-            <p>Hit the "Load" button to load a txt file with geometry.</p>
-          </div>
-        </div>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         
+         <div class="modal-header">
+           <h5 class="modal-title">Help</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+         </div>
+         
+         <div class="modal-body">
+           <p>Enter the geometry of the didgeridoo in the text area. Each line should contain two numbers separated by a space. The first number is the position along the didgeridoo, and the second number is the diameter at that position. In millimeters</p>
+           <h5>Example:</h5>
+           <pre>0 32 [ Mouthpiece is position 0, 32 mm diameter]&#10;100 34 [ at a 100mm mark 34mm wide]&#10;200 38 &#10;1400 38 &#10;</pre>
+          
+           <p> It uses didge-lab v1 to provide simple geometry analisys of didgeridoo shapes. </p>
+
+           <h5>Usage:</h5>
+           <p>Hit the "Analyze" button to calculate the mouthpiece diameter, didgeridoo length, and tuning information. The results will be displayed below.</p>
+           <p>Hit the "Save" button to save the geometry to a txt file.</p>
+           <p>Hit the "Load" button to load a txt file with geometry.</p>
+           <p>Hit the "Load Shape" button to load a predefined shape from the repositories.</p>
+            
+           <h5>Learn More:</h5>
+           <p> For more information on how to read the results, please visit the <a href="{{ site.baseurl }}/2025/02/13/how-to-read-outputs-of-didgelab.html">blog post</a></p>
+         </div>
+       
       </div>
-    `;
+    </div> `;
+
     document.body.appendChild(modal);
     var modal = new bootstrap.Modal(modal);
     modal.show();
@@ -93,17 +105,20 @@ title: Sketch
   document.getElementById("didgeForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    let geoInput = document.getElementById("geoInput").value.trim();
+    let hint = document.getElementById("hint");
 
+    let geoInput = document.getElementById("geoInput").value.trim();
     let geoData = geoInput.split("\n").map(line => {
       let parts = line.trim().split(/\s+/);
       if (parts.length !== 2) {
-        alert("Invalid format! Each line must have exactly two numbers.");
+        hint.classList.add("alert", "alert-danger", "mt-3");
+        hint.textContent = "Invalid format! Each line must have exactly two numbers.";
         throw new Error("Invalid format");
       }
 
       if (parts[0].includes(".") || parts[1].includes(".")) {
-        alert("Sorry no decimals allowed for now.");
+        hint.classList.add("alert", "alert-danger", "mt-3");
+        hint.textContent = "Sorry no decimals allowed for now.";
         throw new Error("Invalid format");
       }
       return [parseFloat(parts[0]), parseFloat(parts[1])];
@@ -117,9 +132,13 @@ title: Sketch
     });
 
     if (!response.ok) {
-      alert("Error connecting to the API.");
-      return; h
+      hint.classList.add("alert", "alert-danger", "mt-3");
+      hint.textContent = "Error in API response";
+      return;
     }
+
+    hint.classList.add("alert", "alert-success", "mt-3");
+    hint.textContent = "Analysis complete!";
 
     let result = await response.json();
 
@@ -131,36 +150,8 @@ title: Sketch
     document.getElementById("soundImg").src = "data:image/png;base64," + result.sound_spectrum_plot;
     document.getElementById("shapeImg").src = "data:image/png;base64," + result.shape_plot;
 
-    document.querySelector(".savebtn").addEventListener("click", function () {
-      var textToSave = geoInput;
-      var hiddenElement = document.createElement('a');
 
-      hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
-      hiddenElement.target = '_blank';
-      hiddenElement.download = 'didgeridoo.txt';
-      hiddenElement.click();
-    });
-
-    document.querySelector(".loadbtn").addEventListener("click", function () {
-      var fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = '.txt';
-      fileInput.click();
-
-      fileInput.addEventListener('change', function () {
-        var file = fileInput.files[0];
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          var text = reader.result;
-          document.getElementById("geoInput").value = text;
-        };
-        reader.readAsText(file);
-      });
-    });
-
-
-    document.getElementById("results").classList.remove("hidden");
+    document.getElementById("results").classList.remove("d-none");
     displayNotesTable(result.notes);
   });
 
@@ -222,5 +213,38 @@ title: Sketch
         document.getElementById("geoInput").value = geo;
       });
   }
+
+  // LOAD / SAVE GEOMETRY
+
+  document.querySelector(".savebtn").addEventListener("click", function () {
+    var textToSave = document.getElementById("geoInput").value;
+    var hiddenElement = document.createElement('a');
+
+    hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'didgeridoo.txt';
+    hiddenElement.click();
+  });
+
+  document.querySelector(".loadbtn").addEventListener("click", function () {
+    var fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.txt';
+    fileInput.click();
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        var text = reader.result;
+        console.log(text);
+        document.getElementById("geoInput").value = text;
+      };
+      reader.readAsText(file);
+    });
+  });
+
+  // ------------------------------------------------------------------------
 
 </script>
