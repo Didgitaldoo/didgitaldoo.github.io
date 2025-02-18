@@ -3,15 +3,29 @@
     src: url(whyteinktrap/WhyteInktrap-Light.woff);
 }
 
+html {
+    font-size: 22px;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
+    margin: 0;
+    padding: 0;
     background-color: white;
     font-family: whyte-inktrap;
     font-size: 1.4em;
-    line-height: 1.3;
-    display: flex;
+    line-height: 1.2;
     justify-content: center;
     overflow-x: hidden;
     width: 100%
+}
+
+.strike { 
+  text-decoration: line-through;
+  
 }
 
 /* Default link style */
@@ -29,16 +43,11 @@ a::after {
     opacity: 1; /* Slight transparency for a softer effect */
 }
 
-html {
-    overflow-x: hidden;
-    width: 100%;
-}
-
-
 h1 {
     display: inline-block;
     font-size: 60px;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 
 a.black{
@@ -52,16 +61,23 @@ h2 {
     line-height: 1.3;
 }
 
+td {
+    padding: 0.8em 0.8em;
+    font-size: 24px;
+    text-wrap: wrap;
+}
+
+tr {
+    padding: 0.2em 0.5em;
+    text-wrap: wrap;
+}
+
 .main {
-    width:1000px;
-    padding: 20px;
-    margin: 10px;
     box-sizing: border-box;
 }
 
 .menu {
-    display: flex;
-    justify-content: center; /*flex-end;*/
+    justify-content: center;
     padding: 10px;
     margin-top: 4px;
     margin-bottom: 20px;
@@ -93,7 +109,7 @@ h2 {
 }
 
 .content {
-    margin-top: 12%;
+    margin-top: 6%;
     animation: fadeIn 0.23s ease-in forwards;
 }
 
@@ -165,17 +181,16 @@ h2 {
         max-height: auto;
     }
 
-    .tile .name {
-        font-size: 18px;
+    html, body {
+        /* font-size: // view width related */
+        font-size: 3.8vw;
     }
 
     h1 {
-        font-size: 48px;
         margin-bottom: 4px;
     }
 
     h2 {
-        font-size: 32px;
         margin-bottom: 4px; /* Reduce spacing */
     }
     
@@ -185,10 +200,24 @@ h2 {
         padding: 8px;
         width: 80%;
         height: auto;
+        text-align: center;
+        justify-content: center;
     }
 
+    td {
+        padding: 0.2em 0.5em;
+        font-size: 10px;
+        text-wrap: wrap;
+    }
+
+    tr {
+        padding: 0.2em 0.5em;
+        font-size: 10px;
+        text-wrap: wrap;
+    }
+  
     img {
-        max-width: 94%;
+        width: 100%;
         height: auto;
     }
 }
