@@ -1,6 +1,6 @@
 ---
 layout: default
-title: How to read a didge sheet
+title: How to read the outputs of Didgelab
 date: 2025-02-13
 ---
 
