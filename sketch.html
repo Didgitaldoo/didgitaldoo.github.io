@@ -4,7 +4,7 @@ title: Sketch
 ---
 <div class="container mt-4">
 
-  <h1 class="text-center mb-4">Didgeridoo Shape Analyzer</h1>
+  <h3 class="text-center mb-2">Shape Analyzer</h3>
 
   <div class="d-flex gap-2 align-items-center">
     <select id="shapeSelect" class="form-select form-select-lg w-auto">
@@ -12,7 +12,11 @@ title: Sketch
       <option value="arusha_1">Arusha 1</option>
       <option value="arusha_2">Arusha 2</option>
       <option value="kizimazi">Kizimazi</option>
-      <!-- <option value="matema">Matema</option> -->
+      <option value="matema">Matema</option>
+      <option value="nazare">Nazare</option>
+      <option value="tamaki1">Tamaki 1</option>
+      <option value="tamaki2">Tamaki 2</option>
+      <option value="opendidgeridoo">OpenDidgeridoo</option>
     </select>
     <button onclick="fetchShape()" class="btn btn-primary mt-1">Load Shape</button>
   </div>
@@ -23,24 +27,28 @@ title: Sketch
         Enter Geometry: position diameter ( in mm)
       </label>
 
-      <textarea id="geoInput" class="form-control" rows="6">0 28 &#10;100 26 &#10;1400 38 &#10;
+      <textarea id="geoInput" class="form-control" rows="7">0 28 &#10;100 26 &#10;1400 38 &#10;
       </textarea>
-      <div class="d-flex gap-2 mt-3">
-        <button type="submit" class="btn btn-success mt-3">Analyze</button>
+      <div class="gap-2 mt-3">
+        <button type="submit" class="btn btn-success btn-lg btn-block">Analyze</button>
     </form>
+  </div>
+
+  <div class="d-flex gap-2 mt-2">
+
     <div class="savebtn mt-3">
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button class="btn btn-primary">Save</button>
     </div>
 
     <div class="loadbtn mt-3">
-      <button type="submit" class="btn btn-primary">Load</button>
+      <button class="btn btn-primary">Load</button>
     </div>
-    <button id="helpModal" type="button" class="btn mt-3 ms-auto">ℹ️</button>
-
+    <button id="helpModal" type="button" class="btn btn-lg mt-3">ℹ️</button>
   </div>
 
   <hr>
-  <div id="results" class="hidden mt-5">
+  <div id="hint"></div>
+  <div id="results" class="d-none mt-3">
     <h2>Results</h2>
 
     <p><strong>Mouthpiece Diameter:</strong> <span id="mouthpiece"></span> mm</p>
@@ -49,6 +57,7 @@ title: Sketch
     <p class="mt-2"><strong>Shape</strong></p>
     <img id="shapeImg" class="img-fluid" alt="Shape" />
 
+    <br>
     <strong>Tuning</strong> <span id="notes"></span>
 
     <p class="mt-2"><strong>Impedance Spectrum</strong></p>
@@ -62,29 +71,40 @@ title: Sketch
 <script>
 
   let apiUrl = "https://didge-calc.ktano-studio.com";
-  // let apiUrl = "http://localhost:8000";
+  //let apiUrl = "http://localhost:8000";
 
   document.getElementById("helpModal").addEventListener("click", function () {
     var modal = document.createElement("div");
     modal.classList.add("modal");
     modal.innerHTML = `
-<div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Help</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-      <p>Enter the geometry of the didgeridoo in the text area. Each line should contain two numbers separated by a space. The first number is the position along the didgeridoo, and the second number is the diameter at that position. In millimeters</p>
-      <p>For example:</p>
-            <pre>0 32 [ Mouthpiece is position 0, 32 mm diameter]&#10;100 34 [ at a 100mm mark 34mm wide]&#10;200 38 &#10;1400 38 &#10;</pre>
-            <p>Hit the "Analyze" button to calculate the mouthpiece diameter, didgeridoo length, and tuning information. The results will be displayed below.</p>
-            <p>Hit the "Save" button to save the geometry to a txt file.</p>
-            <p>Hit the "Load" button to load a txt file with geometry.</p>
-          </div>
-        </div>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         
+         <div class="modal-header">
+           <h5 class="modal-title">Help</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+         </div>
+         
+         <div class="modal-body">
+           <p>Enter the geometry of the didgeridoo in the text area. Each line should contain two numbers separated by a space. The first number is the position along the didgeridoo, and the second number is the diameter at that position. In millimeters</p>
+           <h5>Example:</h5>
+           <pre>0 32 [ Mouthpiece is position 0, 32 mm diameter]&#10;100 34 [ at a 100mm mark 34mm wide]&#10;200 38 &#10;1400 38 &#10;</pre>
+          
+           <p> It uses didge-lab v1 to provide simple geometry analisys of didgeridoo shapes. </p>
+
+           <h5>Usage:</h5>
+           <p>Hit the "Analyze" button to calculate the mouthpiece diameter, didgeridoo length, and tuning information. The results will be displayed below.</p>
+           <p>Hit the "Save" button to save the geometry to a txt file.</p>
+           <p>Hit the "Load" button to load a txt file with geometry.</p>
+           <p>Hit the "Load Shape" button to load a predefined shape from the repositories.</p>
+            
+           <h5>Learn More:</h5>
+           <p> For more information on how to read the results, please visit the <a href="{{ site.baseurl }}/2025/02/13/how-to-read-outputs-of-didgelab.html">blog post</a></p>
+         </div>
+       
       </div>
-    `;
+    </div> `;
+
     document.body.appendChild(modal);
     var modal = new bootstrap.Modal(modal);
     modal.show();
@@ -93,17 +113,20 @@ title: Sketch
   document.getElementById("didgeForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    let geoInput = document.getElementById("geoInput").value.trim();
+    let hint = document.getElementById("hint");
 
+    let geoInput = document.getElementById("geoInput").value.trim();
     let geoData = geoInput.split("\n").map(line => {
       let parts = line.trim().split(/\s+/);
       if (parts.length !== 2) {
-        alert("Invalid format! Each line must have exactly two numbers.");
+        hint.classList.add("alert", "alert-danger", "mt-3");
+        hint.textContent = "Invalid format! Each line must have exactly two numbers.";
         throw new Error("Invalid format");
       }
 
       if (parts[0].includes(".") || parts[1].includes(".")) {
-        alert("Sorry no decimals allowed for now.");
+        hint.classList.add("alert", "alert-danger", "mt-3");
+        hint.textContent = "Sorry no decimals allowed for now.";
         throw new Error("Invalid format");
       }
       return [parseFloat(parts[0]), parseFloat(parts[1])];
@@ -117,9 +140,14 @@ title: Sketch
     });
 
     if (!response.ok) {
-      alert("Error connecting to the API.");
-      return; h
+      hint.classList.add("alert", "alert-danger", "mt-3");
+      hint.textContent = "Error in API response";
+      return;
     }
+
+    hint.classList.remove("alert", "alert-danger");
+    hint.classList.add("alert", "alert-success", "mt-3");
+    hint.textContent = "Analysis complete!";
 
     let result = await response.json();
 
@@ -131,36 +159,8 @@ title: Sketch
     document.getElementById("soundImg").src = "data:image/png;base64," + result.sound_spectrum_plot;
     document.getElementById("shapeImg").src = "data:image/png;base64," + result.shape_plot;
 
-    document.querySelector(".savebtn").addEventListener("click", function () {
-      var textToSave = geoInput;
-      var hiddenElement = document.createElement('a');
+    document.getElementById("results").classList.remove("d-none");
 
-      hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
-      hiddenElement.target = '_blank';
-      hiddenElement.download = 'didgeridoo.txt';
-      hiddenElement.click();
-    });
-
-    document.querySelector(".loadbtn").addEventListener("click", function () {
-      var fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = '.txt';
-      fileInput.click();
-
-      fileInput.addEventListener('change', function () {
-        var file = fileInput.files[0];
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          var text = reader.result;
-          document.getElementById("geoInput").value = text;
-        };
-        reader.readAsText(file);
-      });
-    });
-
-
-    document.getElementById("results").classList.remove("hidden");
     displayNotesTable(result.notes);
   });
 
@@ -222,5 +222,38 @@ title: Sketch
         document.getElementById("geoInput").value = geo;
       });
   }
+
+  // LOAD / SAVE GEOMETRY
+
+  document.querySelector(".savebtn").addEventListener("click", function () {
+    var textToSave = document.getElementById("geoInput").value;
+    var hiddenElement = document.createElement('a');
+
+    hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'didgeridoo.txt';
+    hiddenElement.click();
+  });
+
+  document.querySelector(".loadbtn").addEventListener("click", function () {
+    var fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.txt';
+    fileInput.click();
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        var text = reader.result;
+        console.log(text);
+        document.getElementById("geoInput").value = text;
+      };
+      reader.readAsText(file);
+    });
+  });
+
+  // ------------------------------------------------------------------------
 
 </script>
