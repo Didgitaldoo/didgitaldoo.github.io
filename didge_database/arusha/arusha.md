@@ -9,6 +9,8 @@ title: Arusha
 
 Arusha (key: D) was designed as a didgeridoo with many toots that are well tuned. It is also loud and easy to play. I built it in a bend, saxodidge like shape. Unfortunately the tuning is a bit off. It is half-way between D and D#. Still, it is the main instrument that I use.
 
+[Here is information how to read the technical information below.](/2025/02/13/how-to-read-outputs-of-didgelab.html)
+
 <audio controls>
     <source src="arusha-short-song.mp3" type="audio/mp3">
     Your browser does not support the audio element.

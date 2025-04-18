@@ -41,6 +41,8 @@ title: {shape['name']}
 
     if "description" in shape.keys():    
         content += f"\n\n{shape['description']}"
+
+    content += "\n\n[Here is information how to read the technical information below.](/2025/02/13/how-to-read-outputs-of-didgelab.html)"
  
     # audio example
     song_filename = shape["audio-samples"]["song"]
@@ -60,6 +62,7 @@ title: {shape['name']}
 
 """
     
+
     # geometry
 
     geo = json.load(open(os.path.join(archive_path, shape["geometry"])))

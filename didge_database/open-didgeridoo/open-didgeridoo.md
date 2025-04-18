@@ -9,6 +9,8 @@ title: Open Didgeridoo
 
 This Didgeridoo (key: D) was built after the [Open Didgeridoo](https://www.windproject.it/open-didgeridoo/) measurements by Andrea Ferroni.
 
+[Here is information how to read the technical information below.](/2025/02/13/how-to-read-outputs-of-didgelab.html)
+
 <audio controls>
     <source src="opendidge-short-song.mp3" type="audio/mp3">
     Your browser does not support the audio element.

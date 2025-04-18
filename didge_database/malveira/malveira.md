@@ -11,6 +11,8 @@ Malveira is a Didge in F# that was designed after a Didgeridoo that I found in t
 
 [This is the youtube video of the original Didgeridoo which I used to guide the acoustic copy (black euca didge, starting at 3:29).](https://www.youtube.com/watch?v=Ff0EH5s9P-0&t=212s)
 
+[Here is information how to read the technical information below.](/2025/02/13/how-to-read-outputs-of-didgelab.html)
+
 <audio controls>
     <source src="malveira-short-song.mp3" type="audio/mp3">
     Your browser does not support the audio element.
