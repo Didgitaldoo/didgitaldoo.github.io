@@ -117,6 +117,8 @@ title: {shape['name']}
 
 {table}
 """
+    
+    content += f"\n\n## License\n{shape['license']}"
 
     # write output file
     with open(md_path, "w") as f:

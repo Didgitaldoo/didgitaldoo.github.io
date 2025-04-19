@@ -82,3 +82,7 @@ B5</td>
 </td></tr>
 
 </table>
+
+
+## License
+[Creative Commons BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)

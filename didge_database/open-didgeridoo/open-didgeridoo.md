@@ -94,3 +94,7 @@ A#5</td>
 </td></tr>
 
 </table>
+
+
+## License
+[Open Didgeridoo License](https://www.windproject.it/open-didgeridoo/)
