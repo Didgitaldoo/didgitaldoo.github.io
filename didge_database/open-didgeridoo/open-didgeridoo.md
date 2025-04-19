@@ -7,7 +7,9 @@ title: Open Didgeridoo
 
 <img class="didge_image" src="open_didge.jpg" width="200"/>
 
-This Didgeridoo (key: D) was built after the [Open Didgeridoo](https://www.windproject.it/open-didgeridoo/) measurements by Andrea Ferroni.
+This Didgeridoo (key: D) was built after the [Open Didgeridoo](https://www.windproject.it/open-didgeridoo/) designed by [Andrea Ferroni]([http://www.andreaferroni.it/)](https://www.andreaferroni.it/).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Yjmut_38P04?si=S6LDNNXZ9iIpxcVf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 <audio controls>
     <source src="opendidge-short-song.mp3" type="audio/mp3">
