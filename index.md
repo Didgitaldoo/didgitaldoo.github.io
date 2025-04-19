@@ -4,10 +4,12 @@ title: Home
 ---
 # This place is all about Digital and Didgeridoos
 
-* Didgitaldoo is an open source project for the computer aided design of didgeridoos (see [Didgelab](/didgelab.html))
-* Didgitaldoo is an open source community (see [about us](/about.html))
-* Didgitaldoo is a database of open DIY didgeridoos (see [didge database](/didge-database.html))
-* Didgitaldoo is a blog (see [blog](/blog.html))
-* Didgitaldoo is an online tool to compute resonant peaks of didgeridoo geometries (see [sketch](/sketch.html))
+* [Didgitaldoo is an open source project for the computer aided design of didgeridoos](/didgelab.html)
+* [Didgitaldoo is an open source community](/about.html)
+* [Didgitaldoo is a database of open DIY didgeridoos](/didge-database.html)
+* [Didgitaldoo is a blog](/blog.html)
+* [Didgitaldoo is an online tool to compute resonant peaks of didgeridoo geometries](/sketch.html)
 
-<h1> --- SITE UNDER DEVELOPMENT --- </h1>
+## Latest news
+
+* 14.4.2025: Website launched!

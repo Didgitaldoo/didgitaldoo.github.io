@@ -9,7 +9,7 @@ from pydub import AudioSegment
 sys.path.append("../../../didge-lab/src/")
 from didgelab.calc.geo import Geo
 from didgelab.util.didge_visualizer import vis_didge
-from didgelab.calc.sim.sim import compute_impedance_iteratively, get_notes, compute_impedance, create_segments, get_log_simulation_frequencies
+from didgelab.calc.sim.sim import compute_impedance_iteratively, get_notes, compute_impedance, create_segments, get_log_simulation_frequencies, interpolate_spectrum, compute_ground_spektrum
 
 outfolder = "../../didge_database/"
 
@@ -41,8 +41,6 @@ title: {shape['name']}
 
     if "description" in shape.keys():    
         content += f"\n\n{shape['description']}"
-
-    content += "\n\n[Here is information how to read the technical information below.](/2025/02/13/how-to-read-outputs-of-didgelab.html)"
  
     # audio example
     song_filename = shape["audio-samples"]["song"]
@@ -61,19 +59,30 @@ title: {shape['name']}
 </audio>
 
 """
-    
-
     # geometry
 
     geo = json.load(open(os.path.join(archive_path, shape["geometry"])))
-    content += f"""## Geometry
+    geo = Geo(geo)
 
-* Length: {round(geo[-1][0])}mm
-* Mouthpiece diameter: {round(geo[0][1])}mm
-* Bell diameter: {round(geo[-1][1])}
+    freqs = get_log_simulation_frequencies(1, 1000, 10)
+    segments = create_segments(geo)
+    impedances = compute_impedance(segments, freqs)
+    notes = get_notes(freqs, impedances).round(2)
+    ground_freqs, imp_ip = interpolate_spectrum(freqs, impedances)
+    ground = compute_ground_spektrum(ground_freqs, imp_ip)
 
-[Download JSON](geo.json)
+    content += f"""## Basic info
+
+* Tuning: {notes.note_name.iloc[0][0:-1]}
+* Length: {round(geo.geo[-1][0])}mm
+* Mouthpiece diameter: {round(geo.geo[0][1])}mm
+* Bell diameter: {round(geo.geo[-1][1])}
+
+[Download shape as JSON](geo.json)
 """
+    
+    if "thingiverse" in shape.keys():
+        content += f"\n[Download STL files for 3D printing from Thingiverse]({shape['thingiverse']})"
     
     outfile = os.path.join(asset_folder, "geo.json")
     if not os.path.exists(outfile):
@@ -81,7 +90,6 @@ title: {shape['name']}
         print("created outfile")
     
     # didge geometry image
-    geo = Geo(geo)
     outfile = os.path.join(asset_folder, "geo.png")
     if not os.path.exists(outfile):
         plt.clf()
@@ -91,11 +99,6 @@ title: {shape['name']}
     content += f'\n\n<img src="geo.png" size="200"/>'
 
     # sonic properties
-    freqs = get_log_simulation_frequencies(1, 1000, 10)
-    segments = create_segments(geo)
-    impedances = compute_impedance(segments, freqs)
-    notes = get_notes(freqs, impedances).round(2)
-
     notes = notes[["note_name", "freq", "cent_diff", "rel_imp"]]
     notes.columns = ["Note Name", "Frequency", "Tuning (in Cent)", "Relative Impedance"]
 
@@ -107,15 +110,44 @@ title: {shape['name']}
         even = "" if i%2==0 else ' class="even"'
         table += f"<tr{even}><td>\n" + "</td>\n<td>".join([str(x) for x in row.values()]) + "\n</td></tr>\n"
         i+=1
-
     table += "\n</table>"
+
+    outfile = os.path.join(asset_folder, "impedance_plot.png")
+    if not os.path.exists(outfile):
+        plt.clf()
+        plt.plot(freqs, impedances)
+        plt.xlabel("Frequency")
+        plt.ylabel("Impedance")
+        plt.title("Impedance Spektrum")
+        plt.savefig(outfile)
+        plt.clf()
+        plt.cla()
+        plt.close()
+
+    outfile = os.path.join(asset_folder, "sound_plot.png")
+    if not os.path.exists(outfile):
+        plt.clf()
+        plt.plot(ground_freqs, ground)
+        plt.xlabel("Frequency")
+        plt.ylabel("Amplitude")
+        plt.title("Sound Spektrum")
+        plt.savefig(outfile)
+        plt.clf()
+        plt.cla()
+        plt.close()
+
     content += f"""
     
 ## Sonic properties
+    
+[Here is information how to read these technical information.](/2025/02/13/how-to-read-outputs-of-didgelab.html)
 
 ### Resonant frequencies
 
 {table}
+
+<img src="impedance_plot.png" />
+<img src="sound_plot.png" />
 """
     
     content += f"\n\n## License\n{shape['license']}"

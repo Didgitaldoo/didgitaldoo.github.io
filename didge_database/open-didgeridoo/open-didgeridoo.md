@@ -9,25 +9,27 @@ title: Open Didgeridoo
 
 This Didgeridoo (key: D) was built after the [Open Didgeridoo](https://www.windproject.it/open-didgeridoo/) measurements by Andrea Ferroni.
 
-[Here is information how to read the technical information below.](/2025/02/13/how-to-read-outputs-of-didgelab.html)
-
 <audio controls>
     <source src="opendidge-short-song.mp3" type="audio/mp3">
     Your browser does not support the audio element.
 </audio>
 
-## Geometry
+## Basic info
 
+* Tuning: D
 * Length: 1500mm
 * Mouthpiece diameter: 32mm
 * Bell diameter: 72
 
-[Download JSON](geo.json)
+[Download shape as JSON](geo.json)
 
+[Download STL files for 3D printing from Thingiverse](https://www.thingiverse.com/thing:7014774)
 
 <img src="geo.png" size="200"/>
     
 ## Sonic properties
+    
+[Here is information how to read these technical information.](/2025/02/13/how-to-read-outputs-of-didgelab.html)
 
 ### Resonant frequencies
 
@@ -94,6 +96,9 @@ A#5</td>
 </td></tr>
 
 </table>
+
+<img src="impedance_plot.png" />
+<img src="sound_plot.png" />
 
 
 ## License
