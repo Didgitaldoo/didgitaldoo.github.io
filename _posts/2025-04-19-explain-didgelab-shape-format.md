@@ -4,6 +4,8 @@ title: Explaining the Didgelab shape format
 date: 2025-04-19
 ---
 
+# Explaining the Didgelab shape format
+
 A didgelab shape is a list of segments. Each segment is a pair of numbers; the first number in a segment is the distance from the mouth piece, the second is the diameter of the didgeridoo (the inner diameter) at that point. The unit is mm. So, for example, the pair `0 32` means that the didgeridoo has a diameter of 32mm at the mouthpiece.
 
 Lets describe a cylindrical didgeridoo that has a length of 1.50m and a constant diameter of 40mm:
