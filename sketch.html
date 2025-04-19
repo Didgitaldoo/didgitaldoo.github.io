@@ -42,7 +42,7 @@ Functionalities:
       <option value="none">none</option>
       <option value="arusha_1">Arusha 1</option>
       <option value="arusha_2">Arusha 2</option>
-      <option value="kizimazi">Kizimazi</option>
+      <option value="kizimkazi">Kizimkazi</option>
       <option value="matema">Matema</option>
       <option value="nazare">Nazare</option>
       <option value="tamaki1">Tamaki 1</option>
@@ -208,16 +208,33 @@ Functionalities:
     notesContainer.appendChild(table);
   }
 
-  function fetchShape() {
-
+  async function fetchShape() {
     let shape_name = document.getElementById("shapeSelect").value;
+    let hint = document.getElementById("hint");
 
-    fetch(apiUrl + "/fetch_shape/" + shape_name, { mode: 'no-cors'})
-      .then(response => response.json())
-      .then(data => {
-        let geo = data.geo.map(point => point.join(" ")).join("\n");
-        document.getElementById("geoInput").value = geo;
-      });
+    try {
+      const response = await fetch(apiUrl + "/fetch_shape/" + shape_name);
+
+      if (!response.ok) {
+        throw new Error("Network error or shape not found");
+      }
+
+      const data = await response.json();
+
+      if (!data.geo) {
+        throw new Error("Invalid shape data received");
+      }
+
+      let geo = data.geo.map(point => point.join(" ")).join("\n");
+      document.getElementById("geoInput").value = geo;
+
+      hint.classList.remove("alert", "alert-danger");
+      hint.textContent = "";
+    } catch (err) {
+      console.error(err);
+      hint.classList.add("alert", "alert-danger", "mt-3");
+      hint.textContent = "Failed to fetch geometry shape. Please check your selection.";
+    }
   }
 
   // LOAD / SAVE GEOMETRY
