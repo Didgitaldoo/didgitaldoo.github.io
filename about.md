@@ -16,7 +16,7 @@ With active members across at least three continents and connections worldwide (
 
 ## Didgelab
 
-Didgelab is an open-source toolkit for the computer-aided design of didgeridoos. Inspired by <a href="https://www.didgeridoo-physik.de/">the work of Frank Geipel</a>. Didgelab is the swiss army knife for acoustical didgeridoo computation. It allows users to:
+[Didgelab](https://github.com/didgitaldoo/didge-lab) is an open-source toolkit for the computer-aided design of didgeridoos. Inspired by <a href="https://www.didgeridoo-physik.de/">the work of Frank Geipel</a>. Didgelab is the swiss army knife for acoustical didgeridoo computation. It allows users to:
 
 * Calculate the acoustic properties of a didgeridoo shape, such as its sound spectrum and toots.
 * Design didgeridoo shapes with specific acoustic characteristics.

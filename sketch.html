@@ -212,7 +212,7 @@ Functionalities:
 
     let shape_name = document.getElementById("shapeSelect").value;
 
-    fetch(apiUrl + "/fetch_shape/" + shape_name)
+    fetch(apiUrl + "/fetch_shape/" + shape_name, { mode: 'no-cors'})
       .then(response => response.json())
       .then(data => {
         let geo = data.geo.map(point => point.join(" ")).join("\n");
