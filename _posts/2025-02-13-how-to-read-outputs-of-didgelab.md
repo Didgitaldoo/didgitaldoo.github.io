@@ -21,7 +21,7 @@ Each didgeridoo has a series of toots. When we talk about the tuning of the didg
 
 Impedance denotes how strong the didgeridoo reacts if you play it in a certain frequency. The impedance is different for each frequency. The impedance spectrum is a chart with frequency on the horizontal and impedance on the vertical axis. Here is an example of the impedance spectrum of the Arusha didgeridoo.
 
-<img src="../../../shapes/arusha/impedance_spektrum.png" />
+<img src="/assets/images/example_impedance_spektrum.png" />
 
 When you play the didgeridoo, your lips produce a soundwave at a certain frequency. When playing the ground tone, you feel a very strong response from the didge. Lets call this the response the resonance. The resonance is super high at the ground tone. If you bend the tone a little up or down, you have less resonance and, very quickly, the resonance breaks down completely and you cannot play it at all. This is because the didgeridoo has a resonant peak in the impedance spektrum at the ground tone. The impedance describes how much resonance a didgeridoo produces at a certain frequency. Resonance is still high a few Hertz away from the ground tone frequency, so you can bend the tone a bit. A few Hertz further, the tone breaks down completely because the impedance of the didgeridoo is too low. The next note that you can play is the first toot, which is the next peak in the impedance spektrum. Each toot of the didgeridoo is a peak in the impedance spektrum. Vise-versa, you can read the toots of a didgeridoo from the impedance spektrum. The height of each toot denotes how "playable" a toot is. The higher the peak, the easier the toot is to play.
 
@@ -57,6 +57,6 @@ Lets interpret this resonant frequencies table: The ground note of that didge is
 
 Impedance spektrum and resonant frequencies table show the toots of a didgeridoo. But they do not give a very good insight in how it sounds. Most people are mostly interested in the sound of the ground tone and maybe the first one or two toots. The sound spektrum is a visual representation of the sound. It is produced by an FFT analysis. Again, it is a spektrum over the frequency and shows how "loud" the sound is at each frequency. It is the same visualization that you see in an equalizer. I like to see it as the "tonal balance" of a sound. It shows if the sound is bright or bassy. Generally, you have a different sound spektrum for the ground tone and each toot. In Didgelab I usually print the sound spektrum of the ground tone, although it is possible to do the same for the toots as well.
 
-<img src="../../../shapes/arusha/ground_spektrum.png" />
+<img src="/assets/images/example_ground_spektrum.png" />
 
 Generally, I find it hard to deduct the sound of the didgeridoo from the sound spektrum because the sound spektra of bright or bassy didgeridoos look very similar. I would really like to start a project in which people rate didgeridoo sound examples on different scales (bright, bassy, earthy, clear, muffled..., whatever sound categories you can come up) and then we compute a transformation from the "technical" information, such as impedance or sound spektra, to these human readable scales: This didgeridoo is 80% bright, and has a 40% muffled sound. Hit me up if you would like to support that effort, it requires a solid data collection.
