@@ -2,6 +2,7 @@
 layout: default
 title: How to read the outputs of Didgelab
 date: 2025-02-13
+summary: When reading the outputs of Didgelab, you will ask yourself many questions, such as “why would I care for the tuning of a didgeridoo?” or “what the heck is impedance?” This article wants to explain the most important concepts one by one.
 ---
 
 # How to read the outputs of Didgelab

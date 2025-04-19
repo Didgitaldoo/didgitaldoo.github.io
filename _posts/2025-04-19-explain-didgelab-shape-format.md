@@ -2,6 +2,7 @@
 layout: default
 title: Explaining the Didgelab shape format
 date: 2025-04-19
+summary: This article explains how to format a Didgeridoo shape in Didgelab.
 ---
 
 # Explaining the Didgelab shape format

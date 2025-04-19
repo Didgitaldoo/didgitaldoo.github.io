@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Didge2Blender: Create STL files from Didgelab for 3d printing
+title: Didge2Blender - Create STL files from Didgelab for 3d printing
 date: 2025-04-19
+summary: This script helps you create a Blender mesh from your Didgelab didgeridoo shape. Then, you can export the Blender mesh to STL for 3d printing.
 ---
 
 # Didge2Blender: Create STL files from Didgelab for 3d printing
