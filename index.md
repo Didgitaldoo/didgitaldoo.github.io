@@ -12,4 +12,4 @@ title: Home
 
 ## Latest news
 
-* 14.4.2025: Website launched!
+* 19.4.2025: Website launched!
