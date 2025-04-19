@@ -208,16 +208,27 @@ Functionalities:
     notesContainer.appendChild(table);
   }
 
-  function fetchShape() {
-
+  async function fetchShape() {
     let shape_name = document.getElementById("shapeSelect").value;
+    let hint = document.getElementById("hint");
 
-    fetch(apiUrl + "/fetch_shape/" + shape_name)
-      .then(response => response.json())
-      .then(data => {
-        let geo = data.geo.map(point => point.join(" ")).join("\n");
-        document.getElementById("geoInput").value = geo;
-      });
+    try {
+      const response = await fetch(apiUrl + "/fetch_shape/" + shape_name);
+
+      if (!response.ok) {
+        throw new Error("Shape not found or network error");
+      }
+
+      const data = await response.json();
+      let geo = data.geo.map(point => point.join(" ")).join("\n");
+      document.getElementById("geoInput").value = geo;
+
+      hint.classList.remove("alert", "alert-danger");
+    } catch (err) {
+      console.error(err);
+      hint.classList.add("alert", "alert-danger", "mt-3");
+      hint.textContent = "Shape not found.";
+    }
   }
 
   // LOAD / SAVE GEOMETRY
