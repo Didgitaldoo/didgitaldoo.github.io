@@ -216,18 +216,24 @@ Functionalities:
       const response = await fetch(apiUrl + "/fetch_shape/" + shape_name);
 
       if (!response.ok) {
-        throw new Error("Shape not found or network error");
+        throw new Error("Network error or shape not found");
       }
 
       const data = await response.json();
+
+      if (!data.geo) {
+        throw new Error("Invalid shape data received");
+      }
+
       let geo = data.geo.map(point => point.join(" ")).join("\n");
       document.getElementById("geoInput").value = geo;
 
       hint.classList.remove("alert", "alert-danger");
+      hint.textContent = "";
     } catch (err) {
       console.error(err);
       hint.classList.add("alert", "alert-danger", "mt-3");
-      hint.textContent = "Shape not found.";
+      hint.textContent = "Failed to fetch geometry shape. Please check your selection.";
     }
   }
 
