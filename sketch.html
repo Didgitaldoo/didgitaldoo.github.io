@@ -42,12 +42,13 @@ Functionalities:
       <option value="none">none</option>
       <option value="arusha_1">Arusha 1</option>
       <option value="arusha_2">Arusha 2</option>
+      <option value="arusha_2">Arusha 3</option>
       <option value="kizimkazi">Kizimkazi</option>
       <option value="matema">Matema</option>
-      <option value="nazare">Nazare</option>
+<!--       <option value="nazare">Nazare</option>
       <option value="tamaki1">Tamaki 1</option>
-      <option value="tamaki2">Tamaki 2</option>
-      <option value="opendidgeridoo">OpenDidgeridoo</option>
+      <option value="tamaki2">Tamaki 2</option> -->
+<!--       <option value="opendidgeridoo">OpenDidgeridoo</option> -->
     </select>
     <button onclick="fetchShape()" class="btn btn-primary mt-1">Load Shape</button>
   </div>
@@ -107,6 +108,7 @@ Functionalities:
 
     let spinner = document.getElementById("spinner");
     spinner.style.display="block";
+    spinner.scrollIntoView({ behavior: "smooth" });
     event.preventDefault();
 
     let hint = document.getElementById("hint");
@@ -120,10 +122,15 @@ Functionalities:
         throw new Error("Invalid format");
       }
 
-      if (parts[0].includes(".") || parts[1].includes(".")) {
+      if (parts[0].includes(",") || parts[1].includes(",")) {
         hint.classList.add("alert", "alert-danger", "mt-3");
-        hint.textContent = "Sorry no decimals allowed for now.";
+        hint.textContent = "Comma not allowed. Use dot ( . ) e.g: 1.2";
+        spinner.style.display = "none";
+        // place the hint on top 
+        document.getElementById("hint").scrollIntoView({ behavior: "smooth" });
+
         throw new Error("Invalid format");
+        return
       }
       return [parseFloat(parts[0]), parseFloat(parts[1])];
     });
@@ -157,7 +164,9 @@ Functionalities:
     document.getElementById("soundImg").src = "data:image/png;base64," + result.sound_spectrum_plot;
     document.getElementById("shapeImg").src = "data:image/png;base64," + result.shape_plot;
 
-    document.getElementById("results").classList.remove("d-none");
+    let resultsDiv = document.getElementById("results");
+    resultsDiv.classList.remove("d-none");
+    resultsDiv.scrollIntoView({ behavior: "smooth" });
 
     displayNotesTable(result.notes);
   });
@@ -170,7 +179,10 @@ Functionalities:
     let tbody = document.createElement("tbody");
     let keysToDisplay = ["freq", "note_name", "cent_diff"];
 
-    let freqKeys = Object.keys(notes["freq"]);
+    let freqKeys = Object.keys(notes["freq"]).sort((a, b) => {
+      return parseFloat(notes["freq"][a]) - parseFloat(notes["freq"][b]);
+    });
+
 
     keysToDisplay.forEach(category => {
       let row = document.createElement("tr");
@@ -180,7 +192,6 @@ Functionalities:
       row.appendChild(tdCategory);
 
       let values = freqKeys.map(key => notes[category][key]);
-      //values.unshift(values.pop()); // Rotating last value to the front
       values.forEach(value => {
         let tdValue = document.createElement("td");
 
