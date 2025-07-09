@@ -99,7 +99,8 @@ Functionalities:
 
 <script>
 
-  let apiUrl = "https://didge-calc.ktano-studio.com";
+  //let apiUrl = "https://didge-calc.ktano-studio.com";
+  let apiUrl = "http://jannehring.de:5001";
   //let apiUrl = "http://localhost:8000";
 
   document.getElementById("didgeForm").addEventListener("submit", async function (event) {
@@ -167,7 +168,7 @@ Functionalities:
 
     let table = document.createElement("table");
     let tbody = document.createElement("tbody");
-    let keysToDisplay = ["freq", "note-name", "cent-diff"];
+    let keysToDisplay = ["freq", "note_name", "cent_diff"];
 
     let freqKeys = Object.keys(notes["freq"]);
 
@@ -179,8 +180,7 @@ Functionalities:
       row.appendChild(tdCategory);
 
       let values = freqKeys.map(key => notes[category][key]);
-      values.unshift(values.pop()); // Rotating last value to the front
-
+      //values.unshift(values.pop()); // Rotating last value to the front
       values.forEach(value => {
         let tdValue = document.createElement("td");
 
