@@ -121,10 +121,15 @@ Functionalities:
         throw new Error("Invalid format");
       }
 
-      if (parts[0].includes(".") || parts[1].includes(".")) {
+      if (parts[0].includes(",") || parts[1].includes(",")) {
         hint.classList.add("alert", "alert-danger", "mt-3");
-        hint.textContent = "Sorry no decimals allowed for now.";
+        hint.textContent = "Comma not allowed. Use dot ( . ) e.g: 1.2";
+        spinner.style.display = "none";
+        // place the hint on top 
+        document.getElementById("hint").scrollIntoView({ behavior: "smooth" });
+
         throw new Error("Invalid format");
+        return
       }
       return [parseFloat(parts[0]), parseFloat(parts[1])];
     });
