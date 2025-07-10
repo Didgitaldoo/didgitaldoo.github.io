@@ -200,7 +200,7 @@ Functionalities:
         }
 
         // Color logic for cent-diff
-        if (category === "cent-diff") {
+        if (category === "cent_diff") {
           let diff = Math.abs(value);
           let red = Math.min(222, Math.max(0, (diff / 50) * 222)); // Red at ±50
           let green = Math.min(222, Math.max(0, 222 - (diff / 50) * 222)); // Green near 0
