@@ -12,4 +12,5 @@ title: Home
 
 ## Latest news
 
-* 19.4.2025: Website launched!
+* [25.2.2026: Release of Didgelab 3](2026/02/25/release-didgelab-3.html)
+* 19.4.2025: Website launched
