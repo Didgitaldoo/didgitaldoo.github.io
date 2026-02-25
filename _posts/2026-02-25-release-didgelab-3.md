@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Release of Didgelab 3
-date: 2026-05-25
+date: 2026-02-25
 summary: Release of Didgelab 3
 ---
 
@@ -15,3 +15,5 @@ This release introduces significant improvements to stability, usability, and si
 * **Robust Testing:** Integrated unit tests to ensure reliability and simplify community contributions.
 * **Shapes:** Improved [KigaliShape](https://github.com/Didgitaldoo/didge-lab/blob/main/doc/examples/kigali_shape_parameters.ipynb)
 * **Loss**: [Composite loss functions](https://github.com/Didgitaldoo/didge-lab/blob/main/doc/examples/loss/00_overview.ipynb)
+
+2026/02/25/release-didgelab-3.md
