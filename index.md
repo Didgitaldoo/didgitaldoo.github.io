@@ -12,6 +12,7 @@ title: Home
 
 ## Latest news
 
+* [27.2.2026: New blog article: Didgeridoo design cheat sheet - basics of didgeridoo design in a compact format](2026/02/27/didge-design-cheat-sheet.html)
 * [26.2.2026: New blog article: Acoustic simulation with 1D Finite Element Method Analysis](2026/02/26/1dfem.html)
 * [26.2.2026: New blog article: Didge2Wav - Convert a didgeridoo bore to a wav file](2026/02/26/didge2wav.html)
 * [25.2.2026: Release of Didgelab 3](2026/02/25/release-didgelab-3.html)
