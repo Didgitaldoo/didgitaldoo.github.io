@@ -23,6 +23,6 @@ What did we do with Didgelab?
 * We created acoustic copies of a didgeridoo from a sound sample. We will write a blog article about this soon.
 * Research on sound phenomena of Didgeridoos. We will blog articles about this soon.
 
-In 2022, we released Didgelab 1.0, together with some documentation on [GitHub](https://github.com/didgitaldoo/didge-lab). We are building Didgelab 2.0 which is also in a stable state. Although the core-functionality is the same, the new version has many advantages over version 1.0. But it is still undocumented, so we advise everyone to use Didgelab 1.0.
+In 2022, we released Didgelab 1.0, together with some documentation on [GitHub](https://github.com/didgitaldoo/didge-lab). We are building Didgelab 2.0 which is also in a stable state. Although the core-functionality is the same, the new version has many advantages over version 1.0. In February 2026 we released Didgelab 3.
 
 Didgelab is not a consumer software. If you want to use it you need to program Python code.
