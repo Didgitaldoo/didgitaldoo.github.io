@@ -12,6 +12,7 @@ title: Home
 
 ## Latest news
 
+* [27.5.2026: New blog article: Launch of DidgeLab online](2026/05/27/didgelab-online.html)
 * [27.5.2026: New blog article: Why bent didgeridoos confuse our acoustic simulator - and a fix](2026/05/27/bent-shapes.html)
 * [27.2.2026: New blog article: Didgeridoo design cheat sheet - basics of didgeridoo design in a compact format](2026/02/27/didge-design-cheat-sheet.html)
 * [26.2.2026: New blog article: Acoustic simulation with 1D Finite Element Method Analysis](2026/02/26/1dfem.html)
