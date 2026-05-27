@@ -59,6 +59,26 @@ Functionalities:
     <form id="didgeForm" class="mt-4">
       <textarea id="geoInput" class="form-control" rows="7">0 28 &#10;100 26 &#10;1400 38 &#10;
       </textarea>
+      <div class="d-flex flex-wrap gap-3 mt-3">
+        <div>
+          <label for="temperatureSelect" class="form-label mb-1">Temperature (&deg;C)</label>
+          <select id="temperatureSelect" class="form-select">
+            <option value="20">20</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+            <option value="28" selected>28</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+        <div>
+          <label for="simulationMethodSelect" class="form-label mb-1">Simulation method</label>
+          <select id="simulationMethodSelect" class="form-select">
+            <option value="tlm_cython" selected>Transmission Line Model</option>
+            <option value="1d_fem">1D FEM</option>
+          </select>
+        </div>
+      </div>
       <div class="gap-2 mt-3">
         <button type="submit" class="btn btn-success btn-lg btn-block">Analyze</button>
     </form>
@@ -100,8 +120,19 @@ Functionalities:
 
 <script>
 
+  const apiUrl = (() => {
+    const override =
+      new URLSearchParams(location.search).get("api") ||
+      localStorage.getItem("sketchApiUrl");
+    if (override) return override;
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+    return "https://didgelab-sketch.jannehring.de";
+  })();
+
   //let apiUrl = "https://didge-calc.ktano-studio.com";
-  let apiUrl = "https://didgelab-sketch.jannehring.de";
+  //let apiUrl = "https://didgelab-sketch.jannehring.de";
   //let apiUrl = "http://localhost:8000";
 
   document.getElementById("didgeForm").addEventListener("submit", async function (event) {
@@ -139,7 +170,11 @@ Functionalities:
     let response = await fetch(apiUrl + "/analyze_didge", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({geo: geoData})
+      body: JSON.stringify({
+        geo: geoData,
+        temperature: parseFloat(document.getElementById("temperatureSelect").value),
+        simulation_method: document.getElementById("simulationMethodSelect").value
+      })
     });
 
     spinner.style.display="None";
