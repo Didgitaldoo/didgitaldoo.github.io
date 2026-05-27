@@ -28,6 +28,30 @@ h1 {
     font-family: "Montserrat", sans-serif;
 }
 
+/* Markdown-generated tables (Jekyll posts/pages). Bootstrap 5 only styles
+   tables with class="table", so plain markdown tables need this fallback. */
+.content table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: auto;
+    max-width: 100%;
+}
+.content table th,
+.content table td {
+    border: 1px solid #dee2e6;
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+}
+.content table thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+}
+.content table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
 table.analysis_table{
     border: 0;
 }

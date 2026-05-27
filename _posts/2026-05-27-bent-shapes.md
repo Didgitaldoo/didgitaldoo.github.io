@@ -19,8 +19,7 @@ The trouble starts when the instrument is **bent**. Many real didges are
 curved: some are coiled to be more portable, others follow the natural shape
 of a branch. Our fast simulator assumes the bore is straight, so when we
 feed it a bent didge it makes a systematic mistake: predicted pitches come
-out too low. On the seven didges we tested, the error averages **41 cents**
-- almost half a semitone. That is well past "audible"; it is enough to send
+out too low. On the seven didges we tested, the error averages **41 cents** - almost half a semitone. That is well past "audible"; it is enough to send
 a maker chasing a tuning fault that does not actually exist in the
 instrument.
 
@@ -114,10 +113,10 @@ where
   total bore length).
 - $\mathrm{d}s$ is an **infinitesimal step along that centerline** - the
   geometric length of a tiny segment of the real, curved bore.
-- $\mathrm{d}L_\mathrm{eff}(s)$ is the **effective acoustic length** of
+- $$\mathrm{d}L_\mathrm{eff}(s)$$ is the **effective acoustic length** of
   that same tiny segment, as seen by the 1D wave equation. This is the
   number we feed into TLM in place of $\mathrm{d}s$. Because the term in
-  parentheses is less than one, $\mathrm{d}L_\mathrm{eff} < \mathrm{d}s$
+  parentheses is less than one, $$\mathrm{d}L_\mathrm{eff} < \mathrm{d}s$$
   wherever the bore is bent - the acoustic tube is shorter than the
   physical tube.
 - $\kappa(s)$ is the **local curvature of the centerline** at $s$, in units
