@@ -217,7 +217,7 @@ figures above), comparing all three simulators on the same min-max axis:
 
 The blue (bare TLM) peaks sit visibly *left* of the red dashed (FEM-3D)
 peaks - that is the cent error. The orange (corrected TLM) peaks land
-almost on top of the FEM-3D peaks, especially at low frequencies where the
+closer to the FEM-3D peaks, especially at low frequencies where the
 fundamental and the first few overtones are.
 
 ### Caveats
