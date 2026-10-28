@@ -12,6 +12,7 @@ title: Home
 
 ## Latest news
 
+* [28.10.2026: New blog article: Didge Archive - an open collection of didgeridoos](2026/10/28/didge-archive.html)
 * [28.10.2026: New blog article: A fresh look for Didgitaldoo](2026/10/28/new-design.html)
 * [27.5.2026: New blog article: Launch of DidgeLab online](2026/05/27/didgelab-online.html)
 * [27.5.2026: New blog article: Why bent didgeridoos confuse our acoustic simulator - and a fix](2026/05/27/bent-shapes.html)

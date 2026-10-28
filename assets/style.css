@@ -86,8 +86,9 @@ code {
     font-size: 0.9em;
 }
 pre {
-    background: #2b2118;
-    color: #f3e9dc;
+    background: #f4ebde;
+    color: var(--ink);
+    border: 1px solid var(--line);
     padding: 1rem 1.2rem;
     border-radius: 10px;
     overflow-x: auto;
