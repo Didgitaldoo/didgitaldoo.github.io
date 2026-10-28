@@ -32,4 +32,23 @@ impedance = acoustical_simulation(geo, frequencies, constants=constants)
 
 We also added an example notebook, [temperature_and_humidity.ipynb](https://github.com/Didgitaldoo/didge-lab/blob/main/doc/examples/temperature_and_humidity.ipynb). It simulates the same didgeridoo for a grid of temperatures and humidities and shows the fundamental frequency as a heatmap.
 
-The changes are in these commits: [moist air model](https://github.com/Didgitaldoo/didge-lab/commit/4a8936fa0e060076495d51ae943445487f2b899f) and [documentation](https://github.com/Didgitaldoo/didge-lab/commit/e622cb1a8bc94621303983308f235523d5e3b0fa).
+## How much does it matter?
+
+The resonant frequencies of a tube are proportional to the speed of sound. A change of the speed of sound therefore shifts all resonances by the same musical interval. In cent (100 cent are one semitone) this is `1200 * log2(c2 / c1)`. With the formulas above we get these speeds of sound:
+
+| Temperature | 0% humidity | 50% humidity | 100% humidity |
+| --- | --- | --- | --- |
+| 10 °C | 337.6 m/s | 337.9 m/s | 338.2 m/s |
+| 20 °C | 343.5 m/s | 344.1 m/s | 344.7 m/s |
+| 28 °C | 348.1 m/s | 349.2 m/s | 350.2 m/s |
+| 35 °C | 352.2 m/s | 353.7 m/s | 355.3 m/s |
+
+This results in the following shifts:
+
+* **Temperature:** Every degree Celsius raises the pitch by about 3.5 cent. Between 20 °C and 30 °C at 100% humidity, the resonances move up by about 34 cent, a third of a semitone.
+* **Humidity:** Going from dry air to saturated air raises the pitch by about 3 cent at 10 °C, 6 cent at 20 °C, 10 cent at 28 °C and 15 cent at 35 °C. The warmer the air, the more water vapor it can carry, so humidity matters more.
+* **Both together:** A didgeridoo that is tuned with dry air of 20 °C is about 34 cent higher when it is played with the saturated breath of 28 °C. Between dry air at 10 °C and saturated air at 35 °C, the difference is about 88 cent.
+
+These numbers are computed from the speed of sound alone. In the full simulation, density and viscosity change slightly as well, so the exact shift can differ a little from case to case. The example notebook shows the effect for a concrete didgeridoo.
+
+Differences of a few cent are hardly audible, but 30 cent or more are. This is why it is a good idea to simulate with the temperature at which you want to play, and why a didgeridoo that is perfectly in tune with your drone in a warm room can sound flat in a cold one.
