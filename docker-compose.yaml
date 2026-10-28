@@ -1,0 +1,10 @@
+services:
+  jekyll-site:
+    image: didgitaldoo-site
+    build: .
+    volumes: [ .:/usr/src/app ]
+    ports: [ "4000:4000", "35729:35729" ]
+    # Re-sync gems if the bind-mounted Gemfile.lock changed since the image was built.
+    command: >
+      bash -c "bundle check || bundle install;
+      bundle exec jekyll serve -H 0.0.0.0 --livereload --force_polling"

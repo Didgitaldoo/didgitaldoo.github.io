@@ -1,186 +1,208 @@
-@font-face {
-    font-family: whyte-inktrap;
-    src: url(whyteinktrap/WhyteInktrap-Light.woff);
+:root {
+    --bg: #faf6f0;
+    --surface: #ffffff;
+    --ink: #2b2118;
+    --muted: #7a6b5d;
+    --accent: #b5532a;
+    --accent-dark: #8c3d1c;
+    --line: #e9dfd2;
+    --radius: 14px;
+    --shadow: 0 2px 10px rgba(60, 40, 20, 0.07);
+    --shadow-hover: 0 8px 24px rgba(60, 40, 20, 0.14);
 }
+
+html { scroll-behavior: smooth; }
 
 body {
-    background-color: white;
-    font-family: whyte-inktrap;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
 }
 
-a.navbar-brand{
-    font-size: xx-large;
-    font-family: "Roboto", sans-serif;
-}
+.main { box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
+.main > .content { flex: 1; }
 
-/* Default link style */
-a {
-    color: blue;
-    text-decoration: none;
+/* ---------- Navbar ---------- */
+.header { position: sticky; top: 0; z-index: 100; }
+.navbar {
+    background: rgba(250, 246, 240, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding: 0.7rem 0;
 }
-
-h1 {
-    display: inline-block;
-    font-size: xxx-large;
-    margin-bottom: 20px;
+a.navbar-brand {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--accent);
+}
+a.navbar-brand:hover { color: var(--accent-dark); }
+.navbar .nav-link {
+    color: var(--ink);
     font-weight: 500;
-    margin-top:20px;
-    font-family: "Montserrat", sans-serif;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    transition: background 0.15s, color 0.15s;
+}
+.navbar .nav-link:hover { background: #f0e4d5; color: var(--accent-dark); }
+.navbar-toggler { border-color: var(--line); }
+
+/* ---------- Content ---------- */
+.content { max-width: 880px; padding-top: 2.5rem; padding-bottom: 4rem; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+h1, h2, h3 {
+    font-family: "Fraunces", Georgia, serif;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+h1 { font-size: 2.6rem; font-weight: 700; margin: 0 0 1.2rem; display: block; }
+h2 { font-size: 1.7rem; font-weight: 700; margin: 2.4rem 0 0.8rem; }
+h3 { font-size: 1.25rem; font-weight: 600; margin: 1.8rem 0 0.6rem; }
+
+p { margin-bottom: 1.1rem; }
+img { max-width: 100%; height: auto; border-radius: 10px; }
+hr { border-color: var(--line); opacity: 1; margin: 2rem 0; }
+blockquote {
+    border-left: 4px solid var(--accent);
+    background: #f4ebde;
+    margin: 1.4rem 0;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0 10px 10px 0;
+    color: var(--muted);
+}
+code {
+    background: #f1e7d9;
+    color: var(--accent-dark);
+    padding: 0.1em 0.35em;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+pre {
+    background: #2b2118;
+    color: #f3e9dc;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+pre code { background: none; color: inherit; padding: 0; }
+
+/* Lists on pages: the home page link list becomes cards */
+.content > ul { padding-left: 1.3rem; }
+.content > ul li { margin-bottom: 0.4rem; }
+
+.content > h1:first-child + ul:first-of-type,
+.content > h1:first-child + ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2.5rem;
+}
+.content > h1:first-child + ul li { margin: 0; }
+.content > h1:first-child + ul li a {
+    display: block;
+    height: 100%;
+    padding: 1.2rem 1.3rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.45;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.content > h1:first-child + ul li a:hover {
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent);
 }
 
-/* Markdown-generated tables (Jekyll posts/pages). Bootstrap 5 only styles
-   tables with class="table", so plain markdown tables need this fallback. */
+/* ---------- Tables ---------- */
 .content table {
-    border-collapse: collapse;
-    margin: 1em 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.4em 0;
     width: auto;
     max-width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+    overflow-x: auto;
 }
 .content table th,
 .content table td {
-    border: 1px solid #dee2e6;
-    padding: 0.5em 0.75em;
+    border-bottom: 1px solid var(--line);
+    padding: 0.55em 0.9em;
     text-align: left;
     vertical-align: top;
 }
 .content table thead th {
-    background-color: #f8f9fa;
+    background-color: #f4ebde;
     font-weight: 600;
-    border-bottom: 2px solid #dee2e6;
 }
-.content table tbody tr:nth-child(even) {
-    background-color: #fafafa;
-}
+.content table tbody tr:nth-child(even) { background-color: #fcf9f4; }
+.content table tr:last-child td { border-bottom: 0; }
 
-table.analysis_table{
-    border: 0;
-}
+table.analysis_table { border: 0; }
+.analysis_table td { padding: 5px; }
+.even { background-color: #f1e7d9; }
+a.black { color: var(--ink); }
 
-.analysis_table td{
-    padding:5px;
-}
+.sketch td { padding: 0.8em; font-size: 20px; text-wrap: wrap; }
+.sketch tr { padding: 0.2em 0.5em; text-wrap: wrap; }
 
-.even{
-    background-color: #cccccc;
-}
-
-a.black{
-    color: black;
-}
-
-h2 {
-    font-size: 28px;
-    margin-top: 26px;
-    margin-bottom: 14px;
-    line-height: 1.3;
-    font-family: "Roboto", sans-serif;
-}
-
-.sketch td {
-    padding: 0.8em 0.8em;
-    font-size: 24px;
-    text-wrap: wrap;
-}
-
-.sketch tr {
-    padding: 0.2em 0.5em;
-    text-wrap: wrap;
-}
-
-.main {
-    box-sizing: border-box;
-}
-
+/* ---------- Didge database tiles ---------- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
 .tile {
-    background-color: #eeeeee;
-    padding: 20px;
-    display: inline-block;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.2rem;
+    display: block;
     text-align: center;
-    margin: 12px;
+    color: var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); text-decoration: none; }
+.tile .name { display: block; margin-top: 0.9rem; font-weight: 600; width: auto; }
+.tile img { max-height: 200px; max-width: 100%; display: block; margin: 0 auto; object-fit: contain; }
+.didge_image { float: right; margin: 0 0 1rem 1.5rem; }
+
+/* ---------- Blog list (blog.html) ---------- */
+.content > h2 { margin-top: 1.8rem; margin-bottom: 0.2rem; font-size: 1.3rem; }
+.content > h2 a { color: var(--ink); }
+.content > h2 a:hover { color: var(--accent); text-decoration: none; }
+.content > h2 + p { color: var(--muted); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: center;
 }
 
-.tile .name {
-    display: block;
-    margin-top: 18px;
-    width: 150px;   
-}
-
-.tile img {
-    max-height: 200px;
-    max-width: 200px;
-    display: block;
-}
-
-.didge_image{
-    float:right;
-}
-
-/** MOBILE CSS **/
+/* ---------- Mobile ---------- */
 @media (max-width: 800px) {
-    .menu {
-        float: none;
-        text-align: center;
-        padding: 10px 0;
-    }
-
-    .menu li {
-        float: none;
-        display: inline-block;
-    }
-
-    .menu li a {
-        font-size: 18px;
-        padding: 12px;
-    }
-
-    .header {
-        height: auto; 
-        text-align: center;
-    }
- 
-    .content {
-      display: block;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .tile {
-        display: block; /* Stacks tiles vertically */
-        width: auto;
-        text-align: center;
-        margin: 20px 10px;
-        padding: 30px;
-    }
-
-    .tile img {
-        max-width: 90%;
-        max-height: auto;
-    }
-
-    html, body {
-        font-size: 3.8vw;
-    }
-
-    h1 {
-        margin-bottom: 4px;
-    }
-
-    h2 {
-        margin-bottom: 4px; /* Reduce spacing */
-    }
-    
-    code {
-        font-size: 12px;
-        margin: 8px;
-        padding: 8px;
-        width: 80%;
-        height: auto;
-        text-align: center;
-        justify-content: center;
-    }
-  
-    img {
-        width: 100%;
-        height: auto;
-    }
+    body { font-size: 16px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.4rem; }
+    .content { padding-top: 1.5rem; }
+    .didge_image { float: none; margin: 0 0 1rem; }
+    code { font-size: 0.85em; }
 }
