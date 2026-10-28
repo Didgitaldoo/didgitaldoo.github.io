@@ -135,75 +135,115 @@ Functionalities:
   //let apiUrl = "https://didgelab-sketch.jannehring.de";
   //let apiUrl = "http://localhost:8000";
 
-  document.getElementById("didgeForm").addEventListener("submit", async function (event) {
-
-    let spinner = document.getElementById("spinner");
-    spinner.style.display="block";
-    spinner.scrollIntoView({ behavior: "smooth" });
-    event.preventDefault();
-
+  function showError(message) {
     let hint = document.getElementById("hint");
+    hint.classList.add("alert", "alert-danger", "mt-3");
+    hint.textContent = message;
+    hint.scrollIntoView({ behavior: "smooth" });
+  }
 
-    let geoInput = document.getElementById("geoInput").value.trim();
-    let geoData = geoInput.split("\n").map(line => {
-      let parts = line.trim().split(/\s+/);
-      if (parts.length !== 2) {
-        hint.classList.add("alert", "alert-danger", "mt-3");
-        hint.textContent = "Invalid format! Each line must have exactly two numbers.";
-        throw new Error("Invalid format");
-      }
+  function clearError() {
+    let hint = document.getElementById("hint");
+    hint.classList.remove("alert", "alert-danger");
+    hint.textContent = "";
+  }
 
-      if (parts[0].includes(",") || parts[1].includes(",")) {
-        hint.classList.add("alert", "alert-danger", "mt-3");
-        hint.textContent = "Comma not allowed. Use dot ( . ) e.g: 1.2";
-        spinner.style.display = "none";
-        // place the hint on top 
-        document.getElementById("hint").scrollIntoView({ behavior: "smooth" });
-
-        throw new Error("Invalid format");
-        return
-      }
-      return [parseFloat(parts[0]), parseFloat(parts[1])];
-    });
-
-
-    let response = await fetch(apiUrl + "/analyze_didge", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        geo: geoData,
-        temperature: parseFloat(document.getElementById("temperatureSelect").value),
-        simulation_method: document.getElementById("simulationMethodSelect").value
-      })
-    });
-
-    spinner.style.display="None";
-
-    if (!response.ok) {
-      hint.classList.add("alert", "alert-danger", "mt-3");
-      hint.textContent = "Error in API response";
-      return;
+  // Turns an error response of the API into a readable message. FastAPI sends
+  // validation errors as {"detail": [{"loc": [...], "msg": "..."}, ...]}.
+  async function describeApiError(response) {
+    let prefix = "The API returned an error (HTTP " + response.status + ")";
+    let body;
+    try {
+      body = await response.json();
+    } catch (err) {
+      return prefix + ".";
     }
 
-    hint.classList.remove("alert", "alert-danger");
-    // hint.classList.add("alert", "alert-success", "mt-3");
-    // hint.textContent = "Analysis complete!";
+    let detail = body && body.detail;
+    if (typeof detail === "string") return prefix + ": " + detail;
 
-    let result = await response.json();
+    if (Array.isArray(detail) && detail.length > 0) {
+      let describe = d => {
+        let where = (d.loc || []).filter(p => p !== "body").map(p => typeof p === "number" ? "[" + p + "]" : "." + p).join("").replace(/^\./, "");
+        return (where ? where + ": " : "") + d.msg + (d.input !== undefined ? " (got " + JSON.stringify(d.input) + ")" : "");
+      };
+      let more = detail.length > 1 ? " (and " + (detail.length - 1) + " more problems)" : "";
+      return prefix + ": " + describe(detail[0]) + more;
+    }
 
-    document.getElementById("mouthpiece").textContent = result.mouthpiece_diameter_mm;
-    document.getElementById("length").textContent = result.didgeridoo_length_mm;
-    document.getElementById("notes").textContent = result.notes;
+    return prefix + ".";
+  }
 
-    document.getElementById("impedanceImg").src = "data:image/png;base64," + result.impedance_plot;
-    document.getElementById("soundImg").src = "data:image/png;base64," + result.sound_spectrum_plot;
-    document.getElementById("shapeImg").src = "data:image/png;base64," + result.shape_plot;
+  document.getElementById("didgeForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    let resultsDiv = document.getElementById("results");
-    resultsDiv.classList.remove("d-none");
-    resultsDiv.scrollIntoView({ behavior: "smooth" });
+    let spinner = document.getElementById("spinner");
+    clearError();
+    spinner.style.display = "block";
+    spinner.scrollIntoView({ behavior: "smooth" });
 
-    displayNotesTable(result.notes);
+    try {
+      let geoInput = document.getElementById("geoInput").value.trim();
+      let geoData = geoInput.split("\n").map(line => {
+        let parts = line.trim().split(/\s+/);
+        if (parts.length !== 2) {
+          throw new Error("Invalid format! Each line must have exactly two numbers.");
+        }
+        if (parts[0].includes(",") || parts[1].includes(",")) {
+          throw new Error("Comma not allowed. Use dot ( . ) e.g: 1.2");
+        }
+        return [parseFloat(parts[0]), parseFloat(parts[1])];
+      });
+
+      let controller = new AbortController();
+      let timeout = setTimeout(() => controller.abort(), 60000);
+      let response;
+      try {
+        response = await fetch(apiUrl + "/analyze_didge", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          signal: controller.signal,
+          body: JSON.stringify({
+            geo: geoData,
+            temperature: parseFloat(document.getElementById("temperatureSelect").value),
+            simulation_method: document.getElementById("simulationMethodSelect").value
+          })
+        });
+      } catch (err) {
+        if (err.name === "AbortError") {
+          throw new Error("The API at " + apiUrl + " did not respond within 60 seconds.");
+        }
+        // fetch rejects without details on network errors and CORS problems
+        throw new Error("Could not reach the API at " + apiUrl + ". It may be offline, or the browser blocked the request (CORS).");
+      } finally {
+        clearTimeout(timeout);
+      }
+
+      if (!response.ok) {
+        throw new Error(await describeApiError(response));
+      }
+
+      let result = await response.json();
+
+      document.getElementById("mouthpiece").textContent = result.mouthpiece_diameter_mm;
+      document.getElementById("length").textContent = result.didgeridoo_length_mm;
+      document.getElementById("notes").textContent = result.notes;
+
+      document.getElementById("impedanceImg").src = "data:image/png;base64," + result.impedance_plot;
+      document.getElementById("soundImg").src = "data:image/png;base64," + result.sound_spectrum_plot;
+      document.getElementById("shapeImg").src = "data:image/png;base64," + result.shape_plot;
+
+      let resultsDiv = document.getElementById("results");
+      resultsDiv.classList.remove("d-none");
+      resultsDiv.scrollIntoView({ behavior: "smooth" });
+
+      displayNotesTable(result.notes);
+    } catch (err) {
+      console.error(err);
+      showError(err.message);
+    } finally {
+      spinner.style.display = "none";
+    }
   });
 
   function displayNotesTable(notes) {
@@ -259,10 +299,15 @@ Functionalities:
     let hint = document.getElementById("hint");
 
     try {
-      const response = await fetch(apiUrl + "/fetch_shape/" + shape_name);
+      let response;
+      try {
+        response = await fetch(apiUrl + "/fetch_shape/" + shape_name);
+      } catch (err) {
+        throw new Error("Could not reach the API at " + apiUrl + ". It may be offline, or the browser blocked the request (CORS).");
+      }
 
       if (!response.ok) {
-        throw new Error("Network error or shape not found");
+        throw new Error(await describeApiError(response));
       }
 
       const data = await response.json();
@@ -279,7 +324,7 @@ Functionalities:
     } catch (err) {
       console.error(err);
       hint.classList.add("alert", "alert-danger", "mt-3");
-      hint.textContent = "Failed to fetch geometry shape. Please check your selection.";
+      hint.textContent = err.message;
     }
   }
 
