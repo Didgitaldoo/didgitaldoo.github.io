@@ -134,14 +134,11 @@ pre code { background: none; color: inherit; padding: 0; }
     border-collapse: separate;
     border-spacing: 0;
     margin: 1.4em 0;
-    width: auto;
-    max-width: 100%;
+    width: 100%;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 10px;
     overflow: hidden;
-    display: block;
-    overflow-x: auto;
 }
 .content table th,
 .content table td {
@@ -156,6 +153,10 @@ pre code { background: none; color: inherit; padding: 0; }
 }
 .content table tbody tr:nth-child(even) { background-color: #fcf9f4; }
 .content table tr:last-child td { border-bottom: 0; }
+
+@media (max-width: 800px) {
+    .content table { display: block; overflow-x: auto; }
+}
 
 table.analysis_table { border: 0; }
 .analysis_table td { padding: 5px; }
@@ -184,10 +185,10 @@ a.black { color: var(--ink); }
 .didge_image { float: right; margin: 0 0 1rem 1.5rem; }
 
 /* ---------- Blog list (blog.html) ---------- */
-.content > h2 { margin-top: 1.8rem; margin-bottom: 0.2rem; font-size: 1.3rem; }
-.content > h2 a { color: var(--ink); }
-.content > h2 a:hover { color: var(--accent); text-decoration: none; }
-.content > h2 + p { color: var(--muted); }
+.post-list h2 { margin-top: 1.8rem; margin-bottom: 0.2rem; font-size: 1.3rem; }
+.post-list h2 a { color: var(--ink); }
+.post-list h2 a:hover { color: var(--accent); text-decoration: none; }
+.post-list h2 + p { color: var(--muted); }
 
 /* ---------- Footer ---------- */
 .site-footer {
