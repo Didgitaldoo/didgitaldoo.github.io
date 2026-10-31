@@ -95,9 +95,9 @@ Listening is subjective, so we also measured it. The overtones of a drone have a
 
 | | average difference to the recording |
 |---|---|
-| geometry → sound | **5.0 dB** |
-| impedance → sound, 6 peaks | 7.8 dB |
-| impedance → sound, all peaks up to 3 kHz | 8.4 dB |
+| geometry → sound | **5.7 dB** |
+| impedance → sound, 6 peaks | 8.2 dB |
+| impedance → sound, all peaks up to 3 kHz | 8.8 dB |
 
 Compared with the six-peak version, geometry to sound came closer for eight of the nine instruments. This is no surprise: the bore contains everything, the peaks only part of it. Even with *all* peaks up to 3 kHz, impedance to sound does not catch up. A bore is more than its peaks: how the sound gets from the mouthpiece to the bell depends on the shape between the peaks as well. The [comparison with the Didge Archive](https://github.com/Didgitaldoo/didge-lab/blob/main/doc/archive_comparison.md) describes how the synthesizer was checked against the recordings in detail.
 
