@@ -36,15 +36,15 @@ If you want all the details, the [synthesizer article](https://github.com/Didgit
 
 ### Why only six peaks?
 
-A real didgeridoo has many more resonances: the Arusha bore has 26 below 3 kHz. So why do the examples below use only the first six?
+A real didgeridoo has many more resonances: the Arusha bore has 30 below 3 kHz. So why do the examples below use only the first six?
 
 Because an acoustic target never lists all of them. When you plan a didgeridoo you think about the notes you can play: the drone and two or three toots, maybe one or two more peaks to make the sound stronger or weaker. Nobody specifies the 15th resonance. In DidgeLab's optimizer, too, a target typically has a handful of peaks. With six peaks the examples play exactly what such a target describes, and you hear what impedance to sound gives you *before* a bore exists, including what it cannot know.
 
-The six peaks come from the measured bore, so they are a target that can certainly be built. That makes the comparison fair: the only difference between "geometry" and "impedance" is how much the synthesizer knows about the instrument. And giving it more peaks does not help much: with all peaks up to 3 kHz the result is only a little closer to the recordings (see the measurement below).
+The six peaks come from the measured bore, so they are a target that can certainly be built. That makes the comparison fair: the only difference between "geometry" and "impedance" is how much the synthesizer knows about the instrument. And giving it more peaks does not help: with all peaks up to 3 kHz the result is not closer to the recordings (see the measurement below).
 
 ![The Arusha bore and its impedance spectrum, computed from the geometry and from six peaks](/assets/images/geometry_impedance_sound/arusha_impedance.png)
 
-The picture shows the difference for the Arusha didgeridoo. Up to 700 Hz the six peaks (red) describe the instrument perfectly. Above that, the real bore (grey) has more resonances, but the six peaks do not know about them, so the red curve just fades out. These higher resonances shape the brightness of the sound.
+The picture shows the difference for the Arusha didgeridoo. Up to about 550 Hz the six peaks (red) describe the instrument perfectly. Above that, the real bore (grey) has more resonances, but the six peaks do not know about them, so the red curve just fades out. These higher resonances shape the brightness of the sound.
 
 ## Listen: original, geometry and impedance
 
@@ -87,7 +87,7 @@ The **drone** is a plain, neutral drone, so this is a direct comparison (the ori
 </table>
 </div>
 
-What you will hear: all three versions of one instrument play the **same drone**. DidgeLab predicts the pitch of the drone within about 15 cents of the recordings. The differences are in the **colour** of the sound. The synthesized versions are cleaner than the recordings: there is no room, no microphone and no breath noise of a real player.
+What you will hear: all three versions of one instrument play the **same drone**. DidgeLab predicts the pitch of the drone within about 18 cents of the recordings. The differences are in the **colour** of the sound. The synthesized versions are cleaner than the recordings: there is no microphone or room noise, and much less breath noise than from a real player.
 
 ## Which one sounds more like the real didgeridoo?
 
@@ -95,11 +95,11 @@ Listening is subjective, so we also measured it. The overtones of a drone have a
 
 | | average difference to the recording |
 |---|---|
-| geometry → sound | **5.6 dB** |
-| impedance → sound, 6 peaks | 7.3 dB |
-| impedance → sound, all peaks up to 3 kHz | 7.1 dB |
+| geometry → sound | **5.0 dB** |
+| impedance → sound, 6 peaks | 7.8 dB |
+| impedance → sound, all peaks up to 3 kHz | 8.4 dB |
 
-Compared with the six-peak version, geometry to sound came closer for seven of the nine instruments and was just as close for one more. This is no surprise: the bore contains everything, the peaks only part of it. Even with *all* peaks up to 3 kHz, impedance to sound does not catch up. A bore is more than its peaks: how the sound gets from the mouthpiece to the bell depends on the shape between the peaks as well. The [comparison with the Didge Archive](https://github.com/Didgitaldoo/didge-lab/blob/main/doc/archive_comparison.md) describes how the synthesizer was checked against the recordings in detail.
+Compared with the six-peak version, geometry to sound came closer for eight of the nine instruments. This is no surprise: the bore contains everything, the peaks only part of it. Even with *all* peaks up to 3 kHz, impedance to sound does not catch up. A bore is more than its peaks: how the sound gets from the mouthpiece to the bell depends on the shape between the peaks as well. The [comparison with the Didge Archive](https://github.com/Didgitaldoo/didge-lab/blob/main/doc/archive_comparison.md) describes how the synthesizer was checked against the recordings in detail.
 
 ## Why two ways, then?
 
