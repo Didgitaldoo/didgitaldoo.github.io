@@ -6,8 +6,10 @@ For five didgeridoos of the Didge Archive (neutral drone and a song recorded):
 * geometry:  the measured bore played by the synthesizer (didgelab.synth)
 * impedance: only the first six impedance peaks of the bore, played as a ModalBore
 
-Each version is a neutral drone ("uh"). All clips are loudness-normalised and written
-as MP3.
+Each version is rendered as a neutral drone ("uh"), as a drone with the tongue gliding
+from the front ("ee") to the back ("oo"), and as a 10 s groove (dong-tiki-ritititi, four
+passes). Only the drone has an original recording. All clips are loudness-normalised and
+written as MP3.
 
     DIDGE_ARCHIVE=/path/to/didge-archive python scripts/sound_examples/make_sound_examples.py
 
@@ -23,7 +25,8 @@ from pathlib import Path
 import numpy as np
 from scipy.io import wavfile
 
-from didgelab.synth import Bore, ModalBore, ModelParams, Synthesizer, archive, load_audio
+from didgelab.synth import SONGS, Bore, ModalBore, ModelParams, Synthesizer, archive, load_audio
+from didgelab.synth import song as songs
 from didgelab.synth.techniques import score_controls
 from didgelab.sim.sim_interface import compute_moist_air_properties
 
@@ -34,6 +37,18 @@ IMAGES = ROOT / "assets" / "images" / "geometry_impedance_sound"
 DIDGES = ["Arusha", "Kizimkazi", "Malveira", "Nazare", "Open Didgeridoo"]
 N_PEAKS = 6
 TARGET_RMS_DB = -20.0
+GROOVE, GROOVE_TEMPO, GROOVE_PASSES = "dong-tiki-ritititi", 96.0, 4   # 4 x 2.5 s = 10 s
+TONGUE_SONG = """
+title:  Drone, tongue front to back
+tempo:  80
+meter:  4/4
+
+[rhythm]
+| uh _ _ _ | _ _ _ _ | _ _ _ _ | _ _ _ _ |
+
+[tongue]
+| ee ~ ~ ~ | ~ ~ ~ ~ | ~ ~ ~ ~ | ~ ~ ~ oo |
+"""
 
 
 def slug(name):
@@ -70,6 +85,15 @@ def drone(bore, params):
     return y[int(0.2 * FS):int(2.4 * FS)]
 
 
+def tongue(bore, params):
+    return songs.render(songs.parse(TONGUE_SONG), bore, fs=FS, params=params)
+
+
+def groove(bore, params):
+    return songs.render(songs.load(SONGS[GROOVE]), bore, tempo=GROOVE_TEMPO,
+                        repeats=GROOVE_PASSES, loop=True, fs=FS, params=params)
+
+
 def main(figure_only=False):
     constants = compute_moist_air_properties(temp_celsius=28.0)
     params = ModelParams()
@@ -89,6 +113,9 @@ def main(figure_only=False):
         write_mp3(AUDIO / f"{s}-drone-original.mp3", x)
         write_mp3(AUDIO / f"{s}-drone-geometry.mp3", drone(bore, params))
         write_mp3(AUDIO / f"{s}-drone-impedance.mp3", drone(modal, params))
+        for kind, render in (("tongue", tongue), ("groove", groove)):
+            write_mp3(AUDIO / f"{s}-{kind}-geometry.mp3", render(bore, params))
+            write_mp3(AUDIO / f"{s}-{kind}-impedance.mp3", render(modal, params))
 
         print(name, "drone %.1f Hz" % bore.drone, "peaks", [round(p.freq) for p in peaks], flush=True)
 

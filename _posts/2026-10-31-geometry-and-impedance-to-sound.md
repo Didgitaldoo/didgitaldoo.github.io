@@ -82,6 +82,27 @@ All examples are a plain, neutral drone, so this is a direct comparison (the ori
 
 What you will hear: all three versions of one instrument play the **same drone**. DidgeLab predicts the pitch of the drone within about 18 cents of the recordings. The differences are in the **colour** of the sound. The synthesized versions are cleaner than the recordings: there is no microphone or room noise, and much less breath noise than from a real player.
 
+The synthesizer can also play more than a drone. Here are two more examples for each didgeridoo: a drone during which the tongue glides slowly from the front of the mouth ("ee") to the back ("oo"), and 10 seconds of the rhythm "dong-tiki-ritititi". There are no matching recordings, so only the two synthesized versions are shown.
+
+<div class="sound-examples">
+<table>
+  <thead>
+    <tr><th>Didgeridoo</th><th>Tongue front → back<br>geometry</th><th>Tongue front → back<br>impedance</th><th>Rhythm<br>geometry</th><th>Rhythm<br>impedance</th></tr>
+  </thead>
+  <tbody>
+{% for d in didges %}{% assign parts = d | split: ":" %}{% assign s = parts[0] %}
+    <tr>
+      <td><strong>{{ parts[1] }}</strong></td>
+      <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-tongue-geometry.mp3"></audio></td>
+      <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-tongue-impedance.mp3"></audio></td>
+      <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-groove-geometry.mp3"></audio></td>
+      <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-groove-impedance.mp3"></audio></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
+
 ## Which one sounds more like the real didgeridoo?
 
 Listening is subjective, so we also measured it. The overtones of a drone have a typical pattern of loud and quiet ones, a kind of fingerprint of the instrument. We compared the strengths of the first ten overtones of each neutral recording with the synthesized drone. Volume and the overall tilt of the spectrum were evened out first, because they depend on the microphone. On all nine instruments of the archive, the result is:
