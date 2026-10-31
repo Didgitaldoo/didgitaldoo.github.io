@@ -12,6 +12,8 @@ title: Home
 
 ## Latest news
 
+* [31.10.2026: New blog article: Hearing a didgeridoo before it exists - from shape and from impedance to sound](2026/10/31/geometry-and-impedance-to-sound.html)
+* [31.10.2026: New blog article: CMA-ES - finding didgeridoo shapes with fewer simulations](2026/10/31/cma-es.html)
 * [28.10.2026: New blog article: Temperature and humidity in DidgeLab](2026/10/28/temperature-and-humidity.html)
 * [28.10.2026: New blog article: Didge Archive - an open collection of didgeridoos](2026/10/28/didge-archive.html)
 * [28.10.2026: New blog article: A fresh look for Didgitaldoo](2026/10/28/new-design.html)
