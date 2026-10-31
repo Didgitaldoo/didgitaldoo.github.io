@@ -5,13 +5,12 @@ title: Blog
 <h1>Blog</h1>
 
 <div class="post-list">
-
 {% for post in site.posts %}
-<h2>
-    <a href="{{ post.url }}">{{ post.date | date: "%-d %B %Y" }} - {{ post.title }}</a>
-</h2>
-<p>
-  {{post.summary}}
-</p>
+  <a class="post-tile" href="{{ post.url }}">
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.summary }}</p>
+    <span class="read-more">Read more &rarr;</span>
+  </a>
 {% endfor %}
 </div>

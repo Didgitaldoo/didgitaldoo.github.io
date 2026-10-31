@@ -185,10 +185,41 @@ a.black { color: var(--ink); }
 .didge_image { float: right; margin: 0 0 1rem 1.5rem; }
 
 /* ---------- Blog list (blog.html) ---------- */
-.post-list h2 { margin-top: 1.8rem; margin-bottom: 0.2rem; font-size: 1.3rem; }
-.post-list h2 a { color: var(--ink); }
-.post-list h2 a:hover { color: var(--accent); text-decoration: none; }
-.post-list h2 + p { color: var(--muted); }
+.post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+}
+.post-tile {
+    display: flex;
+    flex-direction: column;
+    padding: 1.3rem 1.4rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    color: var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.post-tile:hover {
+    color: var(--ink);
+    text-decoration: none;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent);
+}
+.post-tile time {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.post-tile h2 { font-size: 1.25rem; margin: 0.4rem 0 0.6rem; }
+.post-tile p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; margin-bottom: 1rem; flex: 1; }
+.post-tile .read-more { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+.post-tile:hover .read-more { color: var(--accent-dark); }
 
 /* ---------- Footer ---------- */
 .site-footer {
