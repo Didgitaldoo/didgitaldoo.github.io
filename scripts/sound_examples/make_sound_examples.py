@@ -2,12 +2,12 @@
 
 For five didgeridoos of the Didge Archive (neutral drone and a song recorded):
 
-* original:  the neutral drone and the first seconds of the song, from the archive
+* original:  the neutral drone from the archive
 * geometry:  the measured bore played by the synthesizer (didgelab.synth)
 * impedance: only the first six impedance peaks of the bore, played as a ModalBore
 
-Each version is rendered as a drone ("uh") and as a groove (dong-tiki-ritititi,
-four passes). All clips are loudness-normalised and written as MP3.
+Each version is a neutral drone ("uh"). All clips are loudness-normalised and written
+as MP3.
 
     DIDGE_ARCHIVE=/path/to/didge-archive python scripts/sound_examples/make_sound_examples.py
 
@@ -23,8 +23,7 @@ from pathlib import Path
 import numpy as np
 from scipy.io import wavfile
 
-from didgelab.synth import (Bore, ModalBore, ModelParams, Synthesizer, archive, load_audio,
-                            render_song_loop, render_song_loop_from_peaks)
+from didgelab.synth import Bore, ModalBore, ModelParams, Synthesizer, archive, load_audio
 from didgelab.synth.techniques import score_controls
 from didgelab.sim.sim_interface import compute_moist_air_properties
 
@@ -34,8 +33,6 @@ AUDIO = ROOT / "assets" / "audio" / "geometry_impedance_sound"
 IMAGES = ROOT / "assets" / "images" / "geometry_impedance_sound"
 DIDGES = ["Arusha", "Kizimkazi", "Malveira", "Nazare", "Open Didgeridoo"]
 N_PEAKS = 6
-SONG, PASSES, TEMPO = "dong-tiki-ritititi", 4, 100.0
-GROOVE_SECONDS = 9.6
 TARGET_RMS_DB = -20.0
 
 
@@ -92,14 +89,6 @@ def main(figure_only=False):
         write_mp3(AUDIO / f"{s}-drone-original.mp3", x)
         write_mp3(AUDIO / f"{s}-drone-geometry.mp3", drone(bore, params))
         write_mp3(AUDIO / f"{s}-drone-impedance.mp3", drone(modal, params))
-
-        x, _ = load_audio(inst.samples["song"], FS)
-        write_mp3(AUDIO / f"{s}-groove-original.mp3", x[:int(GROOVE_SECONDS * FS)])
-        y, _ = render_song_loop(geo, SONG, temperature=28.0, tempo=TEMPO, fs=FS)
-        write_mp3(AUDIO / f"{s}-groove-geometry.mp3", np.tile(y, PASSES))
-        y, _ = render_song_loop_from_peaks(peaks, SONG, mouth_diameter=geo[0][1], temperature=28.0,
-                                           tempo=TEMPO, fs=FS)
-        write_mp3(AUDIO / f"{s}-groove-impedance.mp3", np.tile(y, PASSES))
 
         print(name, "drone %.1f Hz" % bore.drone, "peaks", [round(p.freq) for p in peaks], flush=True)
 

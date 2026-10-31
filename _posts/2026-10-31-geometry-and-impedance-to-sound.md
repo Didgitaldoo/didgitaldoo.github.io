@@ -54,7 +54,7 @@ For five didgeridoos of the [Didge Archive](/2026/10/28/didge-archive.html) you 
 * **Geometry → sound**: the synthesizer plays the measured bore.
 * **Impedance → sound**: the synthesizer plays only the first six impedance peaks of the same bore.
 
-The **drone** is a plain, neutral drone, so this is a direct comparison (the original recordings are a bit shorter). The **groove** is a little rhythm (*dong-tiki-ritititi*) played by the synthesizer. The original groove is the beginning of the song recorded in the archive. It is played by a human with a different rhythm, so compare the *character* of the sound, not the notes.
+All examples are a plain, neutral drone, so this is a direct comparison (the original recordings are a bit shorter).
 
 <style>
   .sound-examples { overflow-x: auto; }
@@ -64,23 +64,16 @@ The **drone** is a plain, neutral drone, so this is a direct comparison (the ori
 <div class="sound-examples">
 <table>
   <thead>
-    <tr><th>Didgeridoo</th><th></th><th>Original</th><th>Geometry → sound</th><th>Impedance → sound</th></tr>
+    <tr><th>Didgeridoo</th><th>Original</th><th>Geometry → sound</th><th>Impedance → sound</th></tr>
   </thead>
   <tbody>
 {% assign didges = "arusha:Arusha,kizimkazi:Kizimkazi,malveira:Malveira,nazare:Nazare,open-didgeridoo:Open Didgeridoo" | split: "," %}
 {% for d in didges %}{% assign parts = d | split: ":" %}{% assign s = parts[0] %}
     <tr>
-      <td rowspan="2"><strong>{{ parts[1] }}</strong></td>
-      <td>drone</td>
+      <td><strong>{{ parts[1] }}</strong></td>
       <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-drone-original.mp3"></audio></td>
       <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-drone-geometry.mp3"></audio></td>
       <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-drone-impedance.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>groove</td>
-      <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-groove-original.mp3"></audio></td>
-      <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-groove-geometry.mp3"></audio></td>
-      <td><audio controls preload="none" src="/assets/audio/geometry_impedance_sound/{{ s }}-groove-impedance.mp3"></audio></td>
     </tr>
 {% endfor %}
   </tbody>
@@ -95,9 +88,9 @@ Listening is subjective, so we also measured it. The overtones of a drone have a
 
 | | average difference to the recording |
 |---|---|
-| geometry → sound | **5.7 dB** |
-| impedance → sound, 6 peaks | 8.2 dB |
-| impedance → sound, all peaks up to 3 kHz | 8.8 dB |
+| geometry → sound | **4.7 dB** |
+| impedance → sound, 6 peaks | 7.7 dB |
+| impedance → sound, all peaks up to 3 kHz | 8.3 dB |
 
 Compared with the six-peak version, geometry to sound came closer for eight of the nine instruments. This is no surprise: the bore contains everything, the peaks only part of it. Even with *all* peaks up to 3 kHz, impedance to sound does not catch up. A bore is more than its peaks: how the sound gets from the mouthpiece to the bell depends on the shape between the peaks as well. The [comparison with the Didge Archive](https://github.com/Didgitaldoo/didge-lab/blob/main/doc/archive_comparison.md) describes how the synthesizer was checked against the recordings in detail.
 
