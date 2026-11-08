@@ -103,6 +103,15 @@ The synthesizer can also play more than a drone. Here are two more examples for 
 </table>
 </div>
 
+<script>
+  // Only one sample plays at a time: starting one pauses all others.
+  document.addEventListener("play", function (e) {
+    document.querySelectorAll(".sound-examples audio").forEach(function (a) {
+      if (a !== e.target) a.pause();
+    });
+  }, true);
+</script>
+
 ## Which one sounds more like the real didgeridoo?
 
 Listening is subjective, so we also measured it. The overtones of a drone have a typical pattern of loud and quiet ones, a kind of fingerprint of the instrument. We compared the strengths of the first ten overtones of each neutral recording with the synthesized drone. Volume and the overall tilt of the spectrum were evened out first, because they depend on the microphone. On all nine instruments of the archive, the result is:
