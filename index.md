@@ -12,6 +12,7 @@ title: Home
 
 ## Latest news
 
+* [9.11.2026: New blog article: Shimmer, hollow, locked, metallic - seven sound effects a didgeridoo can be evolved for](2026/11/09/sound-effects-as-evolution-targets.html)
 * [31.10.2026: New blog article: Hearing a didgeridoo before it exists - from shape and from impedance to sound](2026/10/31/geometry-and-impedance-to-sound.html)
 * [31.10.2026: New blog article: CMA-ES - finding didgeridoo shapes with fewer simulations](2026/10/31/cma-es.html)
 * [28.10.2026: New blog article: Temperature and humidity in DidgeLab](2026/10/28/temperature-and-humidity.html)

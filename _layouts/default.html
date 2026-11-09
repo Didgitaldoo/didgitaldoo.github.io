@@ -78,7 +78,14 @@
 
     <!-- CONTENT -->
     <main class="content container">
+      {% if page.collection == "posts" %}
+      {% comment %}Blog posts: the publication date right below the first heading{% endcomment %}
+      {% capture post_date %}</h1>
+      <p class="post-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></p>{% endcapture %}
+      {{ content | replace_first: "</h1>", post_date }}
+      {% else %}
       {{ content }}
+      {% endif %}
     </main>
 
     <footer class="site-footer">
